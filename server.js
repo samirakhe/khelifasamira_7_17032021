@@ -1,20 +1,28 @@
 const http = require("http");
 const app = require("./app");
-const express = require("express");
 const mysql = require("mysql2");
 const  sequelize  = require("./models");
+const User = require('./models/user');
+const Sequelize  = require("sequelize");
 
-const db = mysql.createConnection({
+
+const db = new Sequelize("groupomania_p7", "root", "minouu", {
     host: "localhost",
-    user: "root",
-    password: "minouu",
-    database: "groupomania_p7",
+    dialect: "mysql",
 });
 
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
+// const db = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "minouu",
+//     database: "groupomania_p7",
+// });
+
+// db.connect(function(err) {
+//     if (err) throw err;
+//     console.log("Connected!");
+//   });
+
 
 app.set("port", 3000);
 const server = http.createServer(app);
