@@ -1,5 +1,7 @@
-const { DataTypes } = require("sequelize/types");
-const { sequelize } = require(".");
+const { Sequelize, Models, DataTypes } = require('sequelize');
+
+const sequelize = { Sequelize, Models, DataTypes };
+
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -8,16 +10,14 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true,
             unique : true,
-
         },
         pseudo: {
             type: DataTypes.STRING,
             createdAt: DataTypes.DATE,
             allowNull : false,
             unique: true,
-        }
-
-    
+        }    
     });
     return User;
+    
 };
