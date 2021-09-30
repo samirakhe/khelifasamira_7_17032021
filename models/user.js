@@ -10,16 +10,34 @@ const User = sequelize.define("User", {
         primaryKey: true,
         autoIncrement: true,
         unique: true,
+        createdAt: DataTypes.DATE,
     },
     pseudo: {
         type: DataTypes.STRING,
-        createdAt: DataTypes.DATE,
         allowNull: false,
         unique: true,
+        createdAt: DataTypes.DATE,
     },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        createdAt: DataTypes.DATE,
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        createdAt: DataTypes.DATE,
+    },
+    
 });
 User.sync();
 module.exports = User;
+
+
+
+
+
 
 // module.exports = (sequelize, DataTypes) => {
 //     const User = sequelize.define('User', {
