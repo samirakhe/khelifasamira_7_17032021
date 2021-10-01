@@ -1,10 +1,7 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("groupomania_p7", "root", "minouu", {
-    host: "localhost",
-    dialect: "mysql",
-});
+const db = require('./init');
 
-const Role = sequelize.define("Role", {
+const Role = db.define("Role", {
     Roleid: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,6 +9,11 @@ const Role = sequelize.define("Role", {
         unique: true,
         createdAt: DataTypes.DATE,
     },
+    nameRole : {
+        type: DataTypes.STRING,
+        unique: true,
+        createdAt: DataTypes.DATE,
+    }, 
 });
-Role.sync();
+
 module.exports = Role;
