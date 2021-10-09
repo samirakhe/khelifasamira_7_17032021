@@ -15,14 +15,15 @@ exports.getAllusers = (req, res) => {
 };
 
 exports.createUsers = (req, res) => {
-    const user = {
-        nom: "khelifa",
-        prenom: "sam",
-        email: "sam@gami.com",
-        password: "ocr",
-        pseudo: "sam",
-    };
-    User.create(user);
+    const user = req.body;
+    User.create(user)
+    .then((newuser) =>{
+        res.json(newuser)
+    }).catch((error)=>{
+        console.log(error);
+        res.status(500).send('Erreur');
+
+    });
 };
 
 exports.modifyUsers = (req, res) => {

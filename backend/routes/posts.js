@@ -4,6 +4,7 @@ const ctrlPosts = require('../controllers/posts');
 const post = require('../models/posts');
 
 router.get('/', ctrlPosts.getAllposts);
+router.get('/:id',ctrlPosts.getOnePost);
 router.post('/', ctrlPosts.createPosts);
 router.put('/:id', ctrlPosts.modifyPosts);
 router.delete('/:id', ctrlPosts.deletePosts);

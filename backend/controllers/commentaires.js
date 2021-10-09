@@ -15,13 +15,23 @@ exports.getAllCom = (req, res) => {
 };
 
 exports.createComm = (req, res) => {
-    const comm = {
-        texte: "j'aime beaucoup ce post !",
-    };
-    Commentaire.create(comm);
+    const comm = req.body;
+    Commentaire.create(comm)
+    .then((newcommentaire) => {
+        res.json(newcommentaire);
+    }).catch ((err)=>{
+        console.log(err);
+        res.status(500).send('Erreur server');
+    });
 };
 
 exports.modifyComm = (req, res) => {
+    const id = req.params.id;
+    const data =  req.body;
+    Commentaire.update ( data, { where: { Commentaireid: id} })
+    .then ((newcomm) => {
+        return res.json(newcomm);
+    })
     // Commentaire.findOne({ _id: req.params.id, userId: req.user }).then((post) => {
     //     const commObject = req.file ? {
     //               ...JSON.parse(req.body.sauce),
@@ -42,11 +52,11 @@ exports.modifyComm = (req, res) => {
 };
 
 exports.deleteComm = (req, res) => {
-    // Commentaire.destroy ({ where: { Commentaireid : req.params.id}})
-    // .then(() =>
-    //     res
-    //         .status(200)
-    //         .json({ message: "Le commentaire est supprimé !" })
-    // )
-    // .catch((error) => res.status(400).json({ error }));
+    Commentaire.destroy ({ where: { Commentaireid : req.params.id}})
+    .then(() =>
+        res
+            .status(200)
+            .json({ message: "Le commentaire est supprimé !" })
+    )
+    .catch((error) => res.status(400).json({ error }));
 };

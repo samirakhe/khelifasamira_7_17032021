@@ -1,7 +1,5 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const Role = require('./roles');
-//const Post = require('./posts');
-const db = require('./init');
+const db = require('./db');
 
 
 const User = db.define("User", {
@@ -10,24 +8,25 @@ const User = db.define("User", {
         primaryKey: true,
         autoIncrement: true,
         unique: true,
-        createdAt: DataTypes.DATE,
+
     },
     pseudo: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        createdAt: DataTypes.DATE,
+       
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        createdAt: DataTypes.DATE,
+        validate: {isEmail: true},
+        
     },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-        createdAt: DataTypes.DATE,
+    
     },
     
 });

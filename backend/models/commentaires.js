@@ -1,5 +1,5 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./init');
+const db = require('./db');
 
 const Commentaire = db.define("Commentaire", {
     Commentaireid: {
@@ -9,10 +9,9 @@ const Commentaire = db.define("Commentaire", {
         unique: true,
     },
     commentaire: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull : true,
-        createdAt: DataTypes.DATE,
     },
 });
-Commentaire.sync();
+
 module.exports = Commentaire;

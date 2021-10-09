@@ -1,16 +1,24 @@
+const { selectFields } = require("express-validator/src/select-fields");
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./init');
+const { databaseVersion } = require("./db");
+const db = require("./db");
 
-const Like = db.define("Like", {
-    Likeid: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        unique: true,
+const Likes = db.define(
+    "Likes",
+    {
+        Likeid: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: 1,
+        },
     },
-    likes: {
-        type: DataTypes.INTEGER,
-    },
-});
-Like.sync();
-module.exports = Like;
+    {
+        indexes: [{ unique: true, fields: ["Userid", "Postid"] }],
+    }
+);
+
+module.exports = Likes;

@@ -1,18 +1,15 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./init');
+const db = require('./db');
 
 const Role = db.define("Role", {
     Roleid: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        unique: true,
-        createdAt: DataTypes.DATE,
     },
     nameRole : {
-        type: DataTypes.STRING,
-        unique: true,
-        createdAt: DataTypes.DATE,
+        type: DataTypes.ENUM('ADMIN', 'EMPLOYE'),
+        allowNull: false,
     }, 
 });
 

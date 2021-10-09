@@ -1,5 +1,5 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./init');
+const db = require('./db');
 const User = require('./user');
 
 
@@ -11,13 +11,19 @@ const Post = db.define("Post", {
         autoIncrement: true,
         unique: true,
     },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     texte: {
         type: DataTypes.STRING,
-        image: DataTypes.BLOB,
-        createdAt: DataTypes.DATE,
     },
+    image: {
+       type: DataTypes.BLOB,
+    },
+
+    
 });
 
-//Post.belongsTo(User, {foreignKey: 'userId'});
-//Post.sync();
+
 module.exports = Post;
