@@ -10,6 +10,7 @@ const Role = db.define("Role", {
     nameRole : {
         type: DataTypes.ENUM('ADMIN', 'EMPLOYE'),
         allowNull: false,
+        
     }, 
 });
 

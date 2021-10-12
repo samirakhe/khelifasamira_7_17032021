@@ -18,3 +18,4 @@ exports.getAllposts = (req, res) => {
             res.status(404).json('Role non trouvé')
         });
 };
+

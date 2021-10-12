@@ -5,6 +5,8 @@ const Role = require('./roles');
 const Commentaire =  require('./commentaires');
 const db = require('./db');
 const Likes = require('./likes');
+//const User_Role = require('./user_role');
+
 
 //relation like
 Like.belongsTo(User, { foreignKey : {name: 'Userid', allowNull: false}, as: 'user',onDelete: 'CASCADE'});

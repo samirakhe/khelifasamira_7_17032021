@@ -7,8 +7,6 @@ const commentaireRoutes =  require('./backend/routes/commentaires');
 const likesRoutes = require('./backend/routes/likes');
 
 
-
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -21,6 +19,5 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/commentaires', commentaireRoutes);
 app.use('/api/likes', likesRoutes);
-
 
 module.exports = app;

@@ -38,7 +38,8 @@ exports.getOnePost = (req, res) => {
 
 exports.createPosts = (req, res) => {
     const post = req.body;
-    Post.create(post)
+    Post.create({...post, Userid: req.user.Userid})
+
         .then ((post_cree) => {
             return res.json(post_cree);
         });
@@ -81,16 +82,39 @@ exports.modifyPosts = (req, res) => {
     // });
 };
 
-exports.deletePosts = (req, res) => {
+exports.deletePosts = async (req, res) => {
+    try {
+        
+        const post = await Post.findOne({where:{Postid : req.params.id, Userid: req.user.Userid}})
+        if(!post){
+            return res.status(401).json('Action non autorisée')
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json('Erreur interne du serveur')
+    }
+    Post.destroy ({ where: { Postid : req.params.id, Userid: req.user.Userid}})
+    .then(() =>
+        res
+            .status(200)
+            .json({ message: "Le post est supprimé !" })
+    )
+    .catch((error) => 
+    {console.log(error)
+    res.status(400).json('Action non autorisée')});
+};
+
+exports.deletePostsbyAdmin = (req, res) => {
     Post.destroy ({ where: { Postid : req.params.id}})
     .then(() =>
         res
             .status(200)
             .json({ message: "Le post est supprimé !" })
     )
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => 
+    {console.log(error)
+    res.status(400).json('Erreur interne du serveur')});
 };
-
 // exports.createLike = (req, res) => {
 //     const likeValue = req.body.likes;
 //     const userLiked = req.body.userLiked;
