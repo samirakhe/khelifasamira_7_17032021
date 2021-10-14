@@ -21,7 +21,9 @@ header{
   color: #FD2D01;
 }
 
-
+.active-button{
+  background-color: #FD2D01;
+}
 .App {
   text-align: center;
 }

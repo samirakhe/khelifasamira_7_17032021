@@ -68,6 +68,7 @@ exports.createUsers = async (req, res, next) => {
 };
 
 exports.login = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const data = { ...req.body };
     User.findOne({ where: { email: data.email }, include: ["roles"] })
 
