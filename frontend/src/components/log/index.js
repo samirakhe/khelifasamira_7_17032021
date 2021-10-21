@@ -4,7 +4,7 @@ import LoginForm from "./login";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material";
 import theme from "../../themes/default"
-import css from "../../App.css"
+//import css from "../../App.css"
 
 const Log = ( props ) => {
     const [SignupModal, setSignupModal] = useState(props.signup);

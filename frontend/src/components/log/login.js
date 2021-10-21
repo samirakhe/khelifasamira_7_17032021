@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import axiosInstance from '../../config/axios.config';
 require("dotenv").config();
 
 
@@ -8,30 +9,32 @@ const Login = () => {
    const [email, setEmail] =  useState("");
    const [password, setPassword] = useState("");
 
-   const emailError =  document.querySelector('.email.error');
-   const passwordError = document.querySelector('.password.error');
+  //  const emailError =  document.querySelector('.email.error');
+  //  const passwordError = document.querySelector('.password.error');
    
    const handleLogin = (e) => {
      e.preventDefault();
      //axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*',
-     axios({
+     axiosInstance({
        method: "post",
-       url:`${process.env.REACT_APP_API_URL}api/users/login`,
-       withCredentials: true,
-       headers:{'Access-Control-Allow-Origin': '*'},
+       url:`/users/login`,
+       //withCredentials: true,
+       //headers:{'Access-Control-Allow-Origin': '*'},
        data:{
          email,
          password,
        },
      })
-     .then((res)=>{
-       console.log(res)
+     .then((userData)=>{
+       console.log(userData)
       //  if(res.data.errors){
       //    emailError.innerHTML =  res.data.errors.email;
       //    passwordError.innerHTML = res.data.errors.password;
       //  }else {
       //    window.location = '/';
       //  }
+      localStorage.setItem("connectedUser", JSON.stringify(userData.data));
+      localStorage.setItem("token", userData.data.token);
      })
      .catch((err)=>{
        console.log(err)
@@ -40,7 +43,7 @@ const Login = () => {
 
 
     return(
-      <form action="" onSubmit={handleLogin} id="signupForm">
+      <form action="" onSubmit={handleLogin} id="loginForm">
         <label htmlFor="email">Email</label>
         <br/>
         <input 

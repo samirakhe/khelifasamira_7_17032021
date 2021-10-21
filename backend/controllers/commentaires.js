@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const passwordValidator = require("password-validator");
 const jwt = require("jsonwebtoken");
 const Commentaire = require("../models/commentaires");
+const Post = require("../models/posts");
 require("dotenv").config();
 
 exports.getAllCom = (req, res) => {
@@ -24,6 +25,29 @@ exports.createComm = (req, res) => {
         res.status(500).send('Erreur server');
     });
 };
+// exports.createComm = async (req, res) => {
+//     try {
+        
+//         const createcomm = await Commentaire.findOne({where:{Postid : req.params.Postid}})
+//         if(!createcomm){
+//             return res.status(401).json('Action non autorisée')
+//         }
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).json('Erreur interne du serveur')
+//     }
+//     Commentaire.create ({where:{Postid : req.params.Postid}})
+//     .then((newcommentaire) =>
+//         res
+//             .status(200)
+//             .json(newcommentaire)
+//     )
+//     .catch((error) => 
+//     {console.log(error)
+//     res.status(400).json('Action non autorisée')});
+// };
+
+
 
 exports.modifyComm = (req, res) => {
     const id = req.params.id;

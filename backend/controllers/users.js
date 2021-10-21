@@ -68,9 +68,10 @@ exports.createUsers = async (req, res, next) => {
 };
 
 exports.login = (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+    console.log("données de connexion: ", req.body)
+   
     const data = { ...req.body };
-    User.findOne({ where: { email: data.email }, include: ["roles"] })
+    User.findOne({ where: { email: data.email.trim() }, include: ["roles"] })
 
         .then((userData) => {
             console.log(userData);

@@ -8,8 +8,8 @@ const init = require('./backend/init');
 
 init.initRoles();
 init.initAdmin();
-app.set("port", 3000);
+app.set("port", 3001);
 const server = http.createServer(app);
-server.listen(3000, (req, res) => {
-    console.log("URL server : http://localhost:" + 3000);
+server.listen(3001, (req, res) => {
+    console.log("URL server : http://localhost:" + 3001);
 });

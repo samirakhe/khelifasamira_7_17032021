@@ -5,6 +5,7 @@ const commentaire = require('../models/commentaires');
 const auth = require('../middleware/auth');
 const admin =  require('../middleware/admin');
 
+
 router.get('/', ctrlComm.getAllCom);
 router.post('/', auth, ctrlComm.createComm);
 router.put('/:id',auth, ctrlComm.modifyComm);
