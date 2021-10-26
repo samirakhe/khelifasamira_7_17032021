@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './log.css';
 import axios from 'axios';
 import axiosInstance from '../../config/axios.config';
 
@@ -38,7 +39,7 @@ const Signup = () => {
 
     return(
         <form action="" onSubmit={handleSignup} id="signupForm">
-        <label htmlFor="pseudo">Pseudo</label>
+        <label className="label" htmlFor="pseudo">Pseudo</label>
         <br/>
         <input 
           type="text" 
@@ -50,7 +51,7 @@ const Signup = () => {
           <div className="pseudo error"></div>
 
         <br/>
-        <label htmlFor="email">Email</label>
+        <label className="label" htmlFor="email">Email</label>
         <br/>
         <input 
           type="text" 
@@ -62,7 +63,7 @@ const Signup = () => {
           <div className=" email error"></div>
 
         <br/>
-        <label htmlFor="password">Mot de passe</label>
+        <label className="label" htmlFor="password">Mot de passe</label>
         <br/>
         <input 
           type="password" 
@@ -72,7 +73,7 @@ const Signup = () => {
           value={password}/>
           <div className="password error"></div>
           <br/>
-        <input type="submit" value="S'inscrire"/>
+        <input className="button" type="submit" value="S'inscrire"/>
       </form>
     );
 };

@@ -17,9 +17,10 @@ exports.getAllCom = (req, res) => {
 
 exports.createComm = (req, res) => {
     const comm = req.body;
+    comm.Userid = req.user.Userid;
     Commentaire.create(comm)
     .then((newcommentaire) => {
-        res.json(newcommentaire);
+        res.json({...newcommentaire.dataValues, user:{pseudo:req.user.pseudo}});
     }).catch ((err)=>{
         console.log(err);
         res.status(500).send('Erreur server');

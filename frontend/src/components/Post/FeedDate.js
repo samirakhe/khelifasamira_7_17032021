@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import './Feed.css';
 
 const FeedDate = (props) => {
     const [date, setDate] = useState("");
@@ -11,7 +12,9 @@ const FeedDate = (props) => {
     })
     return (
     <>
+    <div className="dateCommentaire">
             {date}
+    </div>
     </>
     )
 }

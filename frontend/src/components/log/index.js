@@ -31,7 +31,7 @@ const Log = ( props ) => {
                         onClick={handleModals} 
                         id="register" 
                         className={SignupModal ? "active-button" : null}>
-                        S'inscrire
+                        Créer un compte
                         </Button>
                     </ThemeProvider>
                     <ThemeProvider theme={theme}>

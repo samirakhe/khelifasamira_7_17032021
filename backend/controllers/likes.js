@@ -7,19 +7,19 @@ require("dotenv").config();
 
 exports.LikedPost = (req, res) => {
     Like.findOne({
-        where: { Userid: req.body.userId, Postid: req.body.postId },
+        where: { Userid: req.user.Userid, Postid: req.body.Postid },
     }).then((likes) => {
         if (likes == null) {
-            Like.create({Userid:req.body.userId, Postid: req.body.postId})
+            Like.create({Userid:req.user.Userid, Postid: req.body.Postid})
             .then((likes) => {
 
                 res.status(200).json(likes);
             });
             
         } else {
-            Like.update({isActive: !likes.isActive}, {where: {Userid: req.body.userId, Postid: req.body.postId}})
+            Like.update({isActive: !likes.isActive}, {where: {Userid: req.user.Userid, Postid: req.body.Postid}})
             .then(()=>{
-                Like.findOne({where: { Userid: req.body.userId, Postid: req.body.postId }})
+                Like.findOne({where: { Userid: req.user.Userid, Postid: req.body.Postid }})
                 .then((likeModified)=>{
                     res.status(200).json(likeModified);
 

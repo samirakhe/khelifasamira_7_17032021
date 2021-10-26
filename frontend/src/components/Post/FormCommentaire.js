@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Feed.css";
 import axiosInstance from "../../config/axios.config";
 
 const FormCommentaire = (props) => {
-    //const [Userid, setUserid] = useState("");
     const [texte, setTexte] = useState("");
 
     const handleFormCommentaire = (e) => {
@@ -12,14 +12,15 @@ const FormCommentaire = (props) => {
         axiosInstance({
             method: "post",
             url: `/commentaires`,
-
             data: {
-                texte,
+                commentaire: texte,
+                Postid: props.postId,
             },
         })
             .then((newComm) => {
                 console.log(newComm);
                 props.onCommCreated(newComm.data);
+                setTexte('');
             })
             .catch((err) => {
                 console.log(err);
@@ -33,7 +34,9 @@ const FormCommentaire = (props) => {
             onSubmit={handleFormCommentaire}
             id="FormCommentaire"
         >
-            <label htmlFor="texte">Commentaire</label>
+            <label className="write-comment" htmlFor="texte">
+                Écrivez un commentaire
+            </label>
             <br />
             <input
                 type="text"
@@ -44,9 +47,7 @@ const FormCommentaire = (props) => {
             />
 
             <div className=" texte error"></div>
-
             <br />
-
             <input type="submit" value="Poster" />
         </form>
     );

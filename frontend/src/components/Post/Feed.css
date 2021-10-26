@@ -1,3 +1,33 @@
+.write-comment{
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.bloc-commentaire{
+  background-color:#fae7e7;
+  text-align: left;
+  padding: 5px;
+  margin:5px 0 5px 0;
+  border-radius: 20px;
+
+}
+
+.pseudo{
+  font-weight: bold;
+  font-size:12px;
+  line-height: 0px;
+}
+.comment{
+  line-height: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+}
+.dateCommentaire{
+  font-size: 10px;
+}
+
+
 .card {
     -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;

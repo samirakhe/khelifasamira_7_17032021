@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './log.css';
 import axios from 'axios';
 import axiosInstance from '../../config/axios.config';
 require("dotenv").config();
@@ -35,6 +36,7 @@ const Login = () => {
       //  }
       localStorage.setItem("connectedUser", JSON.stringify(userData.data));
       localStorage.setItem("token", userData.data.token);
+      window.location = '/';
      })
      .catch((err)=>{
        console.log(err)
@@ -44,7 +46,7 @@ const Login = () => {
 
     return(
       <form action="" onSubmit={handleLogin} id="loginForm">
-        <label htmlFor="email">Email</label>
+        <label className="label" htmlFor="email">Email</label>
         <br/>
         <input 
           type="text" 
@@ -56,7 +58,7 @@ const Login = () => {
           <div className=" email error"></div>
 
         <br/>
-        <label htmlFor="password">Mot de passe</label>
+        <label className="label" htmlFor="password">Mot de passe</label>
         <br/>
         <input 
           type="password" 
@@ -67,7 +69,7 @@ const Login = () => {
           <div className="password error"></div>
           <br/>
 
-        <input type="submit" value="Se connecter"/>
+        <input className="button" type="submit" value="Se connecter"/>
       </form>
     );
       

@@ -25,6 +25,8 @@ const FormPost = (props) => {
         .then((newPost)=>{
           console.log(newPost)
           props.onPostCreated(newPost.data)
+          // setTitle('');
+          // setTexte('');
          
         })
         .catch((err)=>{
