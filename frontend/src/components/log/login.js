@@ -36,6 +36,7 @@ const Login = () => {
       //  }
       localStorage.setItem("connectedUser", JSON.stringify(userData.data));
       localStorage.setItem("token", userData.data.token);
+      localStorage.setItem("pseudo", userData.data.pseudo);
       window.location = '/';
      })
      .catch((err)=>{

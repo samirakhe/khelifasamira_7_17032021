@@ -2,7 +2,15 @@
   font-size: 12px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.updateCom, .deleteCom{
+  font-size: 10px;
+  margin-right: 5px;
+}
+.update-delete-comm{
+  display: flex;
+  flex-direction:row;
+  justify-content: flex-start;
+}
 
 .bloc-commentaire{
   background-color:#fae7e7;
@@ -10,7 +18,7 @@
   padding: 5px;
   margin:5px 0 5px 0;
   border-radius: 20px;
-
+ 
 }
 
 .pseudo{

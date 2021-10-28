@@ -7,9 +7,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CreateIcon from "@mui/icons-material/Create";
 import axios from "axios";
+import UpdatePost from "./UpdatePost";
 
 const ITEM_HEIGHT = 48;
-export default function LongMenu (props) {
+export default function LongMenu(props) {
     //Code importé Material UI-------------------------------------------------------------
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -20,33 +21,46 @@ export default function LongMenu (props) {
         setAnchorEl(null);
     };
     //FIN code importé Material UI-------------------------------------------------------------
-    console.log(props.Postid);
     
+// const updatePost = (e) => {
+//     e.preventDefault();
+
+//     axiosInstance({
+
+//         method:"put",
+//         url: `/posts/${props.Postid}`,
+//     }).then((successUpdate)=>{
+//             if (successUpdate) {
+//                 props.upPost(props.Postid);
+//                 console.log("post modifié");
+               
+//             } else {
+//                 console.log("Action non autorisée");
+//             }
+//     })
+// }
+
+
+
+
     const deletedPost = (e) => {
         e.preventDefault();
-        
+
         axiosInstance({
-          method: "delete",
-          url:`/posts/${props.Postid}`,   
-          data:{
-            Postid : props.postId,
-          },   
-        })
-        .then((successDelete)=>{
-            
-            if(successDelete){
-                props.delPost(props.postId);
-                console.log('post supprimé')
-                window.location = '/';
-            }else{
-                console.log('Erreur')
+            method: "delete",
+            url: `/posts/${props.Postid}`,
+           
+        }).then((successDelete) => {
+            if (successDelete) {
+                props.delPost(props.Postid);
+                console.log("post supprimé");
+               
+            } else {
+                console.log("Action non autorisée");
             }
-            console.log('success' + successDelete)
-        })
-        
-    }    
-     
-   
+        });
+    };
+
     return (
         <div>
             <IconButton
@@ -83,4 +97,4 @@ export default function LongMenu (props) {
             </Menu>
         </div>
     );
-            }
+}

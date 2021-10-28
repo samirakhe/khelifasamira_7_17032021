@@ -92,6 +92,7 @@ exports.login = (req, res) => {
                         });
                     }
                     res.status(200).json({
+                        pseudo: user.pseudo,
                         email: user.email,
                         roles: user.roles,
                         token: jwt.sign(

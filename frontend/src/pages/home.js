@@ -3,9 +3,11 @@ import axios from "axios";
 import Feed from "../components/Post/Feed";
 import FormPost from "../components/Post/FormPost";
 import axiosInstance from "../config/axios.config";
+import Auth from '../components/auth';
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    
     
 
     const getPost = async () => {
@@ -23,12 +25,18 @@ const Home = () => {
     };
    
     const delPost = (postId) => {
-      setPosts(posts.filter(post => post.postId !== postId))
+    setPosts(posts.filter(post => post.Postid !== postId))
+    }
+
+    const upPost = (postId) => {
+        setPosts(posts.filter(post => post.Postid !== postId))
     }
 
     return (
         <div className="main">
+            <Auth userConnected={true}>
             <FormPost onPostCreated={postCreated} />
+            </Auth>
             {posts.map((item) => (
                 <Feed delPost={delPost}  post={item} key={item.Postid} />
             ))}

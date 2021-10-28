@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FeedCommItem from './FeedCommItem';
 
 
 const FeedComm = (props) => {
-   
+
         return (
             <>
                 {props.commentaires.map((comm) => (
-                <FeedCommItem data={comm} key={comm.Commentaireid} />
+                <FeedCommItem delComment={props.delComment} data={comm} key={comm.Commentaireid} />
+                
             ))}
             </>
         )

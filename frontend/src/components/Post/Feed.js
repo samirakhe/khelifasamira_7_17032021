@@ -25,6 +25,7 @@ import Verticalmenu from "./Verticalmenu";
 import "./Feed.css";
 import FormCommentaire from "./FormCommentaire";
 import Likes from "./Likes";
+import IsOwner from "../isOwner";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -47,6 +48,11 @@ export default function Feed(props) {
         setCommentaires([newComm, ...commentaires]);
     };
 
+    const delComment = (commentaireId) => {
+        setCommentaires(commentaires.filter(comm => comm.Commentaireid !== commentaireId))
+      }
+   
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -55,6 +61,10 @@ export default function Feed(props) {
         setCommentaires(props.post.commentaires);
        
     }, []);
+
+    
+
+
 
     
 
@@ -68,7 +78,9 @@ export default function Feed(props) {
                 }
                 action={
                     <IconButton aria-label="settings">
-                        <Verticalmenu delPost={props.delPost} Postid={props.post.Postid}/>
+                        <IsOwner user={props.post.user.pseudo}>
+                        <Verticalmenu  delPost={props.delPost} Postid={props.post.Postid}/>
+                        </IsOwner>
                     </IconButton>
                 }
                 subheader={<FeedDate date={props.post.createdAt} />}
@@ -107,15 +119,9 @@ export default function Feed(props) {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography>
-                        <FormCommentaire
-                            postId={props.post.Postid}
-                            onCommCreated={commCreated}
-                        />
-                        {commentaires ? (
-                            <FeedComm commentaires={commentaires} />
-                        ) : (
-                            <> </>
-                        )}
+                        <FormCommentaire postId={props.post.Postid} onCommCreated={commCreated}/>
+                        {commentaires ? (<FeedComm delComment={delComment} commentaires={commentaires} />) : ( <> </>)}
+                        
                     </Typography>
                 </CardContent>
             </Collapse>

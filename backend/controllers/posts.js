@@ -55,6 +55,9 @@ exports.createPosts = (req, res) => {
         return res.json({
             ...post_cree.dataValues,
             user: { pseudo: req.user.pseudo },
+            likes: [],
+            commentaires: []
+
         });
     });
 
