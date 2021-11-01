@@ -2,8 +2,9 @@ import React from "react";
 import FeedDate from "./FeedDate";
 import './Feed.css';
 import axiosInstance from '../../config/axios.config';
-import IsOwner from "../isOwner";
+
 import Auth from "../auth";
+
 
 
 const FeedCommItem = (props) => {
@@ -29,9 +30,7 @@ const FeedCommItem = (props) => {
         });
     };
 
-
-
-
+    
     return (
         <div className="bloc-commentaire">
             <p className="pseudo">{props.data.user.pseudo}</p>
@@ -40,7 +39,7 @@ const FeedCommItem = (props) => {
             <FeedDate  date={props.data.createdAt} />
             <div className="update-delete-comm">
             <Auth userConnected={true}>
-            <p><a href="#"  className="updateCom">Modifier</a></p>
+            <p><a href="#"  onClick={deleteComment} className="updateCom">Modifier</a></p>
             <p><a href="#" onClick={deleteComment} className="deleteCom">Supprimer</a></p>
             </Auth>
             

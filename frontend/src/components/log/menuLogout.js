@@ -4,12 +4,17 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaUserAlt } from 'react-icons/fa';
 
-export default function BasicMenu() {
+export default function BasicMenu(props) {
+
+  const goToProfil = () =>{
+    window.location = '/userprofil'
+  }
 
     const logout = () =>{
         localStorage.removeItem('token');
         localStorage.removeItem('pseudo');
         localStorage.removeItem('connectedUser');
+        localStorage.removeItem('roles');
         window.location = '/';
     }
 
@@ -42,7 +47,7 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profil</MenuItem>
+        <MenuItem onClick={goToProfil}>Profil</MenuItem>
         <MenuItem onClick={logout}>Se Déconnecter</MenuItem>
       </Menu>
     </div>

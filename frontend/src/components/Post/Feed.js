@@ -26,6 +26,10 @@ import "./Feed.css";
 import FormCommentaire from "./FormCommentaire";
 import Likes from "./Likes";
 import IsOwner from "../isOwner";
+import IsAdmin from "../isAdmin";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import axiosInstance from "../../config/axios.config";
+import UpdatePost from "./UpdatePost";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -51,6 +55,8 @@ export default function Feed(props) {
     const delComment = (commentaireId) => {
         setCommentaires(commentaires.filter(comm => comm.Commentaireid !== commentaireId))
       }
+
+  
    
 
     const handleExpandClick = () => {
@@ -62,6 +68,24 @@ export default function Feed(props) {
        
     }, []);
 
+    const deletedPostFromAdmin = (e) => {
+        e.preventDefault();
+        
+        axiosInstance({
+            method: "delete",
+            url: `/posts/admin/${props.post.Postid}`,
+
+           
+        }).then((successDeleteFromAdmin) => {
+            if (successDeleteFromAdmin) {
+                props.delPost(props.post.Postid);
+                console.log("post supprimé");
+               
+            } else {
+                console.log("Action non autorisée");
+            }
+        });
+    };
     
 
 
@@ -77,9 +101,11 @@ export default function Feed(props) {
                     </Avatar>
                 }
                 action={
+
                     <IconButton aria-label="settings">
+                        
                         <IsOwner user={props.post.user.pseudo}>
-                        <Verticalmenu  delPost={props.delPost} Postid={props.post.Postid}/>
+                        <Verticalmenu upPost={props.upPost} delPost={props.delPost} post={props.post}/> 
                         </IsOwner>
                     </IconButton>
                 }
@@ -101,7 +127,11 @@ export default function Feed(props) {
                <Likes likes={props.post.likes} postId={props.post.Postid}/>
 
                 <IconButton aria-label="share">
-                    <ShareIcon />
+                    <IsAdmin>
+                <DeleteOutlineIcon onClick={deletedPostFromAdmin} />
+                
+                </IsAdmin>
+                
                 </IconButton>
                 <ExpandMore
                     onClick={handleExpandClick}
@@ -120,7 +150,7 @@ export default function Feed(props) {
                 <CardContent>
                     <Typography>
                         <FormCommentaire postId={props.post.Postid} onCommCreated={commCreated}/>
-                        {commentaires ? (<FeedComm delComment={delComment} commentaires={commentaires} />) : ( <> </>)}
+                        {commentaires ? (<FeedComm  delComment={delComment} commentaires={commentaires} />) : ( <> </>)}
                         
                     </Typography>
                 </CardContent>

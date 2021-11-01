@@ -9,7 +9,8 @@ import BasicMenu from '../log/menuLogout';
 
 
 
-const Header = () =>{
+const Header = (props) =>{
+  const userCo = localStorage.getItem('pseudo');
     
     return (
        <header>
@@ -19,7 +20,7 @@ const Header = () =>{
                 <p className = "accountIcon"><Button color="neutral" href="/profil"><FaUserAlt/></Button></p>
               </Auth>
               <Auth userConnected={true}>
-              <p className = "accountIcon"><Button  color="neutral"><BasicMenu/></Button></p>
+              <p className = "accountIcon"><Button  color="neutral">{userCo}<BasicMenu/></Button></p>
               </Auth>
           </div>
        </header>

@@ -78,23 +78,6 @@ exports.modifyPosts = (req, res) => {
     Post.update(data, { where: { Postid: id } }).then((newpost) => {
         return res.json(newpost);
     });
-    // Post.findOne({ where: { Postid : req.params.id}}, { where: { Userid : req.params.id}}).then((post) => {
-    //     const postObject = req.file ? {
-    //               ...JSON.parse(req.body.sauce),
-    //               imageUrl: `${req.protocol}://${req.get("host")}/images/${
-    //                   req.file.filename }`,
-    //           } : { ...req.body };
-    //     if (req.file) {
-    //         const filename = post.imageUrl.split("/images")[1];
-    //         fs.unlinkSync("images/" + filename);
-    //     }
-
-    //     Post.updateOne({ _id: req.params.id }, { ...postObject })
-    //         .then(() =>
-    //             res.status(200).json({ message: "Le post est modifié !" })
-    //         )
-    //         .catch((error) => res.status(400).json({ error }));
-    // });
 };
 
 exports.deletePosts = async (req, res) => {

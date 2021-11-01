@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import FormPost from './FormPost';
+import CreateIcon from "@mui/icons-material/Create";
+import EditPost from './EditPost';
 
 const style = {
   position: 'absolute',
@@ -17,14 +19,14 @@ const style = {
   p: 4,
 };
 
-export default function UpdatePost() {
+export default function UpdatePost(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <CreateIcon onClick={handleOpen}/>
       <Modal
         open={open}
         onClose={handleClose}
@@ -32,7 +34,7 @@ export default function UpdatePost() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <FormPost/>
+          <EditPost handleClose={handleClose} upPost={props.upPost} post={props.post}/>
         </Box>
       </Modal>
     </div>

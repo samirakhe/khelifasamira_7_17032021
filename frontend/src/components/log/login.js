@@ -15,12 +15,9 @@ const Login = () => {
    
    const handleLogin = (e) => {
      e.preventDefault();
-     //axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*',
      axiosInstance({
        method: "post",
        url:`/users/login`,
-       //withCredentials: true,
-       //headers:{'Access-Control-Allow-Origin': '*'},
        data:{
          email,
          password,
@@ -35,9 +32,11 @@ const Login = () => {
       //    window.location = '/';
       //  }
       localStorage.setItem("connectedUser", JSON.stringify(userData.data));
+      window.location = '/';
       localStorage.setItem("token", userData.data.token);
       localStorage.setItem("pseudo", userData.data.pseudo);
-      window.location = '/';
+      localStorage.setItem("roles", JSON.stringify (userData.data.roles));
+     
      })
      .catch((err)=>{
        console.log(err)
@@ -72,6 +71,7 @@ const Login = () => {
 
         <input className="button" type="submit" value="Se connecter"/>
       </form>
+    
     );
       
 };

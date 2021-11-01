@@ -4,13 +4,16 @@ const IsOwner = (props) => {
 
 const [pseudo, setPseudo] = useState('');
 
+
+
 useEffect(()=>{
-    const connectedUser = localStorage.getItem('pseudo');
-    setPseudo(connectedUser)
+
+    const connectedUser = localStorage.getItem('pseudo'); 
+    setPseudo(connectedUser)   
 })
     return (
         <>
-            {props.user==pseudo? props.children:<></>}
+            {props.user==pseudo? props.children:<></>}      
         </>
     )
 }

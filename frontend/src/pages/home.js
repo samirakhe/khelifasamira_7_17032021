@@ -28,9 +28,17 @@ const Home = () => {
     setPosts(posts.filter(post => post.Postid !== postId))
     }
 
-    const upPost = (postId) => {
-        setPosts(posts.filter(post => post.Postid !== postId))
+    const upPost = (postId, data) => {
+        const postIndex = posts.findIndex(post => post.Postid === postId);
+        const postsArray = [...posts]
+        const findPost = postsArray[postIndex];
+        findPost.title = data.title;
+        findPost.texte = data.texte;
+
+        postsArray[postIndex] = findPost;
+        setPosts(postsArray)
     }
+
 
     return (
         <div className="main">
@@ -38,7 +46,7 @@ const Home = () => {
             <FormPost onPostCreated={postCreated} />
             </Auth>
             {posts.map((item) => (
-                <Feed delPost={delPost}  post={item} key={item.Postid} />
+                <Feed  upPost={upPost} delPost={delPost}  post={item} key={item.Postid} />
             ))}
            
         </div>

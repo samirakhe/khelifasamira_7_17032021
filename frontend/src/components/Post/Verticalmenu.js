@@ -9,6 +9,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import axios from "axios";
 import UpdatePost from "./UpdatePost";
 
+
 const ITEM_HEIGHT = 48;
 export default function LongMenu(props) {
     //Code importé Material UI-------------------------------------------------------------
@@ -48,11 +49,11 @@ export default function LongMenu(props) {
 
         axiosInstance({
             method: "delete",
-            url: `/posts/${props.Postid}`,
+            url: `/posts/${props.post.Postid}`,
            
         }).then((successDelete) => {
             if (successDelete) {
-                props.delPost(props.Postid);
+                props.delPost(props.post.Postid);
                 console.log("post supprimé");
                
             } else {
@@ -60,6 +61,8 @@ export default function LongMenu(props) {
             }
         });
     };
+
+    
 
     return (
         <div>
@@ -88,12 +91,15 @@ export default function LongMenu(props) {
                     },
                 }}
             >
-                <MenuItem onClick={handleClose}>
-                    <CreateIcon />
+                 <MenuItem >
+                    <UpdatePost upPost={props.upPost} post={props.post}/>
                 </MenuItem>
                 <MenuItem onClick={deletedPost}>
                     <DeleteOutlineIcon />
                 </MenuItem>
+                
+                
+                
             </Menu>
         </div>
     );
