@@ -139,21 +139,41 @@ exports.getOneUser = (req, res) => {
 };
 
 exports.modifyUsers = (req, res) => {
-    // User.update({}, { where: { Userid : /*req.params.id*/} })
-    //     .then((user) => {
-    //         console.log('utilisateur modifé');
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+    const data = req.body;
+    User.findByPk(req.params.id)//on recherche l'user qui a l'id qui correspond à la PK
+
+    .then((user)=>{
+        if(!user){
+            return res.status(404).json("User non trouvé");
+
+        }else{
+            bcrypt.compare(data.password, user.password )
+            .then((valid)=>{
+                if(!valid){
+                    return res.status(404).json("Mot de passe incorrect")
+                }else{
+                    User.update({password: data.newPassword }, { where: { Userid : req.params.id} })
+                         .then((user) => {
+                            return res.status(200).json('mot de passe modifé');
+                  })
+                    .catch((err) => {
+                    console.log(err);
+                });
+                }
+
+            })
+            }
+
+        })
+    
 };
 
 exports.deleteUsers = (req, res) => {
-    // User.destroy ({ where: { Userid : /*req.params.id*/}})
-    // .then(() =>
-    //     res
-    //         .status(200)
-    //         .json({ message: "L'utilisateur est supprimé !" })
-    // )
-    // .catch((error) => res.status(400).json({ error }));
+    User.destroy ({ where: { Userid : req.params.id}})
+    .then(() =>
+        res
+            .status(200)
+            .json({ message: "L'utilisateur est supprimé !" })
+    )
+    .catch((error) => res.status(400).json({ error }));
 };

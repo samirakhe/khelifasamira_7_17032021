@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import axios from 'axios';
 import MessageIcon from "@mui/icons-material/Message";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
@@ -56,7 +55,7 @@ export default function Feed(props) {
         setCommentaires(commentaires.filter(comm => comm.Commentaireid !== commentaireId))
       }
 
-  
+
    
 
     const handleExpandClick = () => {

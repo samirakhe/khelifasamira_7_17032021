@@ -2,9 +2,10 @@
   font-size: 12px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .updateCom, .deleteCom{
-  font-size: 10px;
-  margin-right: 5px;
+
+  cursor: pointer;
 }
 .update-delete-comm{
   display: flex;

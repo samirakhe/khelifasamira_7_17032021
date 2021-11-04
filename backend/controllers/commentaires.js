@@ -57,23 +57,7 @@ exports.modifyComm = (req, res) => {
     .then ((newcomm) => {
         return res.json(newcomm);
     })
-    // Commentaire.findOne({ _id: req.params.id, userId: req.user }).then((post) => {
-    //     const commObject = req.file ? {
-    //               ...JSON.parse(req.body.sauce),
-    //               imageUrl: `${req.protocol}://${req.get("host")}/images/${
-    //                   req.file.filename }`,
-    //           } : { ...req.body };
-    //     if (req.file) {
-    //         const filename = post.imageUrl.split("/images")[1];
-    //         fs.unlinkSync("images/" + filename);
-    //     }
-
-    //     Commentaire.updateOne({ _id: req.params.id }, { ...commObject })
-    //         .then(() =>
-    //             res.status(200).json({ message: "Le commentaire est modifié !" })
-    //         )
-    //         .catch((error) => res.status(400).json({ error }));
-    // });
+   
 };
 
 exports.deleteComm = async (req, res) => {

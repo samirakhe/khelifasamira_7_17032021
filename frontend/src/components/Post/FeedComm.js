@@ -7,7 +7,7 @@ const FeedComm = (props) => {
         return (
             <>
                 {props.commentaires.map((comm) => (
-                <FeedCommItem  delComment={props.delComment} data={comm} key={comm.Commentaireid} />
+                <FeedCommItem  upComment={props.upComment} delComment={props.delComment} data={comm} key={comm.Commentaireid} />
                 
             ))}
             </>

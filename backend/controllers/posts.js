@@ -71,11 +71,12 @@ exports.createPosts = (req, res) => {
 
     // });
 };
-
+ 
 exports.modifyPosts = (req, res) => {
     const id = req.params.id;
     const data = req.body;
-    Post.update(data, { where: { Postid: id } }).then((newpost) => {
+    Post.update(data, { where: { Postid: id } })
+    .then((newpost) => {
         return res.json(newpost);
     });
 };
