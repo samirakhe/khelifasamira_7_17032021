@@ -3,13 +3,15 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaUserAlt } from 'react-icons/fa';
+import './log.css';
 
-export default function BasicMenu(props) {
+
+export default function MenuLogout(props) {
+  const userCo = localStorage.getItem('pseudo');
 
   const goToProfil = () =>{
     window.location = '/userprofil'
   }
-
     const logout = () =>{
         localStorage.removeItem('token');
         localStorage.removeItem('pseudo');
@@ -27,6 +29,8 @@ export default function BasicMenu(props) {
     setAnchorEl(null);
   };
 
+
+
   return (
     <div>
       <Button
@@ -36,7 +40,7 @@ export default function BasicMenu(props) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-       <FaUserAlt/>
+       <span className="userCo">{userCo}</span> < FaUserAlt/>
       </Button>
       <Menu
         id="basic-menu"
@@ -49,6 +53,7 @@ export default function BasicMenu(props) {
       >
         <MenuItem onClick={goToProfil}>Profil</MenuItem>
         <MenuItem onClick={logout}>Se Déconnecter</MenuItem>
+        
       </Menu>
     </div>
   );

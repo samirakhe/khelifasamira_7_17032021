@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-
 import axiosInstance from '../../config/axios.config';
-
-
-
 
 const EditComm = (props) => { 
 
     const [texte, setTexte] = useState(props.commentaire.commentaire);
-
     const handleFormComm = (e) => {
         e.preventDefault();
         
@@ -18,12 +13,11 @@ const EditComm = (props) => {
         
         data:{
         commentaire:texte,
-          },
-         
+          },       
         
     }).then((success)=>{
         console.log(success)
-        debugger
+      
         const data = {Commentaireid:props.commentaire.Commentaireid, texte:texte}
         props.upComment(data)
         setTexte('');
@@ -35,11 +29,8 @@ const EditComm = (props) => {
         console.log(err)
       })
     }
-
-
     return(
-        <form className="formulaire" action="" onSubmit={handleFormComm} id="FormPost">
-        
+        <form className="formulaire" action="" onSubmit={handleFormComm} id="FormPost">  
         <label htmlFor="texte">Votre Message</label>
         <br/>
         <input 
@@ -53,7 +44,7 @@ const EditComm = (props) => {
 
         <br/>
         
-        <input type="submit" value="Modifier"/>
+        <input  type="submit" value="Modifier"/>
       </form>
     );
 };

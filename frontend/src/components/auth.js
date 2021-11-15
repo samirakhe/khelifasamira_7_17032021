@@ -13,7 +13,7 @@ useEffect(()=>{
 })
     return (
         <>
-            {props.userConnected==isConnected? props.children:<></>}
+            {props.userConnected===isConnected? props.children:<></>}
         </>
     )
 }

@@ -3,14 +3,13 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const db = require('../models/db');
 
-exports.initRoles = () => {
-    Role.findAll()
-    .then((roles)=>{
-        if(roles && roles.length > 0){
-            return;
-        }
-        Role.bulkCreate ([{nameRole : 'ADMIN'}, {nameRole : 'EMPLOYE'}])
-    })
+exports.initRoles = async () => {
+    const roles = await Role.findAll();
+    if(roles && roles.length > 0){
+        return;
+    }
+    await Role.bulkCreate ([{nameRole : 'ADMIN'}, {nameRole : 'EMPLOYE'}])
+    
 }
 
 exports.initAdmin = () => {

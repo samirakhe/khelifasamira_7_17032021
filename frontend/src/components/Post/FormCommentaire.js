@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./Feed.css";
 import axiosInstance from "../../config/axios.config";
 
@@ -44,11 +43,10 @@ const FormCommentaire = (props) => {
                 id="texte"
                 onChange={(e) => setTexte(e.target.value)}
                 value={texte}
+               
             />
-
-            <div className=" texte error"></div>
             <br />
-            <input type="submit" value="Poster" />
+            <input className="btn" type="submit" value="Poster" />
         </form>
     );
 };

@@ -13,7 +13,7 @@ useEffect(()=>{
 })
     return (
         <>
-            {props.user==pseudo? props.children:<></>}      
+            {props.user===pseudo? props.children:<></>}      
         </>
     )
 }

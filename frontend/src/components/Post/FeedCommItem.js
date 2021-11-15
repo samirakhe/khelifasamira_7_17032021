@@ -5,8 +5,6 @@ import axiosInstance from '../../config/axios.config';
 
 import Auth from "../auth";
 
-import CreateIcon from "@mui/icons-material/Create";
-import UpdatePost from "./UpdatePost";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import UpdateComm from "./UpdateComm";
 

@@ -9,10 +9,10 @@ const FeedDate = (props) => {
     useEffect(()=>{
         const propsDate = new Date (props.date)
         setDate(new Intl.DateTimeFormat('default', options).format(propsDate))
-    })
+    },[props.date])
     return (
     <>
-    <div className="dateCommentaire">
+    <div className="dateTexte">
             {date}
     </div>
     </>

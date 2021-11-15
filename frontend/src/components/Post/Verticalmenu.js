@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axiosInstance from "../../config/axios.config";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import CreateIcon from "@mui/icons-material/Create";
-import axios from "axios";
+
 import UpdatePost from "./UpdatePost";
 
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from '../../config/axios.config';
 import Badge from "@mui/material/Badge";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Auth from "../auth";
 
 
 const Likes = (props) => {
@@ -27,7 +28,7 @@ const Likes = (props) => {
           
         })
         .then((newLike)=>{
-            const index = likes.findIndex(like=>like.Likeid == newLike.data.Likeid)
+            const index = likes.findIndex(like=>like.Likeid === newLike.data.Likeid)
             const likes2 = likes;
             if(index !== -1){
                 console.log('like existant');
@@ -47,7 +48,12 @@ const Likes = (props) => {
     }
     return (
         <Badge badgeContent={likeCount} color="primary">
+            <Auth userConnected={true}>
             <FavoriteIcon onClick={executeLike}   color="action" />
+            </Auth>
+            <Auth userConnected={false}>
+            <FavoriteIcon color="action" />
+            </Auth>
         </Badge>
     );
 };

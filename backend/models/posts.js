@@ -17,9 +17,13 @@ const Post = db.define("Post", {
     },
     texte: {
         type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: { msg: "Le champs est obligatoire" },
+          },
     },
     image: {
-       type: DataTypes.BLOB,
+       type: DataTypes.STRING,
     },
 
     

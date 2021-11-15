@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Feed from "./Post/Feed";
+
 
 const IsAdmin = (props) => {
     const [isAdmin, setIsAdmin] = useState(false);

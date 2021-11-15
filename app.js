@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql2');
-//const cors = require('cors');
 const userRoutes = require('./backend/routes/users');
 const postRoutes = require('./backend/routes/posts');
 const commentaireRoutes =  require('./backend/routes/commentaires');
 const likesRoutes = require('./backend/routes/likes');
-
+const multer = require('multer')
+const path = require('path')
+const cors = require("cors");
+const bodyParser = require('body-parser');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,7 +17,19 @@ app.use((req, res, next) => {
     next();
 });
 
-//app.use(cors({origin: "*"}));
+
+
+//ajoutés seule lors de mes tests images
+app.use(cors());
+app.use('/images', express.static(path.join(__dirname, 'backend/images')));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+
+
 app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);

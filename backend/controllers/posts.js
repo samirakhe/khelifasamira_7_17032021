@@ -7,6 +7,7 @@ const Post = require("../models/posts");
 const User = require("../models/user");
 const Commentaires = require("../models/commentaires");
 const sequelize = require("../models/db");
+const multer = require('multer');
 require("dotenv").config();
 
 exports.getAllposts = (req, res) => {
@@ -46,32 +47,57 @@ exports.getOnePost = (req, res) => {
         });
 };
 
+
+
 exports.createPosts = (req, res) => {
+    
     const post = req.body;
+    try{
+        if (!req.file) {
+        console.log("No file upload");
+        } else {
+        console.log(req.file.filename)
+        post.image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+      
+    }   
     Post.create({ ...post, Userid: req.user.Userid })
     .then((post_cree) => {
-        // post_cree.user = {pseudo: req.user.pseudo};
-        //console.log(post_cree)
-        return res.json({
-            ...post_cree.dataValues,
+        return res.json({ ...post_cree.dataValues,
             user: { pseudo: req.user.pseudo },
             likes: [],
             commentaires: []
 
         });
-    });
-
-    // User.findByPk (post.Userid)
-    // .then((expediteur)=>{
-    //     console.log(expediteur);
-    //     Post.create({...post, Userid: expediteur.Userid}, post)
-    //     .then ((post_cree) => {
-    //         return res.json(post_cree);
-    //     });
-
-    // });
+    });}
+    catch{
+        console.log(err)
+    }
 };
  
+//PREMIERE VERSION SANS IMAGE
+// exports.createPosts = (req, res) => {
+//     const post = req.body;
+//     Post.create({ ...post, Userid: req.user.Userid })
+//     .then((post_cree) => {
+//         // post_cree.user = {pseudo: req.user.pseudo};
+//         //console.log(post_cree)
+//         return res.json({
+//             ...post_cree.dataValues,
+//             user: { pseudo: req.user.pseudo },
+//             likes: [],
+//             commentaires: []
+
+//         });
+//     });
+
+
+
+ 
+
+
+
+
+
 exports.modifyPosts = (req, res) => {
     const id = req.params.id;
     const data = req.body;

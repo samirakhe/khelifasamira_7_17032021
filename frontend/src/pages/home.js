@@ -7,9 +7,6 @@ import Auth from '../components/auth';
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
-    
-    
-
     const getPost = async () => {
         const source = axios.CancelToken.source();
         const response = await axiosInstance.get(`/posts`);
@@ -27,6 +24,7 @@ const Home = () => {
     const delPost = (postId) => {
     setPosts(posts.filter(post => post.Postid !== postId))
     }
+  
 
     const upPost = (postId, data) => {
         const postIndex = posts.findIndex(post => post.Postid === postId);
@@ -47,8 +45,7 @@ const Home = () => {
             </Auth>
             {posts.map((item) => (
                 <Feed  upPost={upPost} delPost={delPost}  post={item} key={item.Postid} />
-            ))}
-           
+            ))}        
         </div>
     );
 };

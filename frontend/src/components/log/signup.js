@@ -1,80 +1,94 @@
-import React, { useState } from 'react';
-import './log.css';
-import axios from 'axios';
-import axiosInstance from '../../config/axios.config';
-
+import React, { useState } from "react";
+import "./log.css";
+import axiosInstance from "../../config/axios.config";
+import { useForm } from "react-hook-form";
+import {login} from "../../services/loginService";
 const Signup = () => {
+  const {register,handleSubmit,watch,formState: { errors }} = useForm();
 
-    const [pseudo, setPseudo] = useState("");
-    const [email, setEmail] =  useState("");
-    const [password, setPassword] = useState("");
-    
-    
-    const handleSignup = (e) => {
-        e.preventDefault();
-        //axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*',
+    const handleSignup = (data) => {
         axiosInstance({
-          method: "post",
-          url:`/users/signup`,
-          //withCredentials: true,
-          //headers:{'Access-Control-Allow-Origin': '*'},
-          data:{
-            pseudo,
-            email,
-            password,
-          },
+            method: "post",
+            url: `/users/signup`,
+            data: {
+                pseudo : data.pseudo,
+                email : data.email,
+                password : data.password,
+            },
         })
-        .then((newUser)=>{
-          console.log(newUser)
-          
-            window.location = '/';
-          
-         localStorage.setItem("connectedUser", JSON.stringify(newUser.data));
-        
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
-      }
+            .then((newUser) => {
+                console.log(newUser);
+                login(data.email, data.password)
+                .then((userData)=>{
+                    console.log(userData)
+                   localStorage.setItem("connectedUser", JSON.stringify(userData.data));
+                   window.location = '/';
+                   localStorage.setItem("token", userData.data.token);
+                   localStorage.setItem("pseudo", userData.data.pseudo);
+                   localStorage.setItem("roles", JSON.stringify (userData.data.roles));     
+                  })
+                  .catch((err)=>{
+                   
+                    console.log(err.response.data.error)
+                  })
+               
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        console.log(data);
+    };
 
-    return(
-        <form action="" onSubmit={handleSignup} id="signupForm">
-        <label className="label" htmlFor="pseudo">Pseudo</label>
-        <br/>
-        <input 
-          type="text" 
-          name="pseudo" 
-          id="pseudo" 
-          onChange={(e) => setPseudo(e.target.value)} 
-          value={pseudo}/>
+    console.log(watch("pseudo"));
 
-          <div className="pseudo error"></div>
+    return (
+        <form action="" onSubmit={handleSubmit(handleSignup)} id="signupForm">
+            <label className="label" htmlFor="pseudo">
+                Pseudo
+            </label>
+            <br />
 
-        <br/>
-        <label className="label" htmlFor="email">Email</label>
-        <br/>
-        <input 
-          type="text" 
-          name="email" 
-          id="email" 
-          onChange={(e) => setEmail(e.target.value)} 
-          value={email}/>
+            <input
+                type="text"
+                name="pseudo"
+                id="pseudo"
+              {...register("pseudo", { required: true })}
+              
+            />
+            {errors.pseudo && <span>Le titre est obligatoire</span>}
+            <br />
 
-          <div className=" email error"></div>
+            <label className="label" htmlFor="email">
+                Email
+            </label>
+            <br />
+            <input
+                type="email"
+                name="email"
+                id="email"
+                {...register("email", { required: true })}
+                
+            />
+            {errors.email && <span>L'email' est obligatoire</span>}
+            <br />
 
-        <br/>
-        <label className="label" htmlFor="password">Mot de passe</label>
-        <br/>
-        <input 
-          type="password" 
-          name="password" 
-          id="password" 
-          onChange={(e) => setPassword(e.target.value)} 
-          value={password}/>
-          <div className="password error"></div>
-          <br/>
-        <input className="button" type="submit" value="S'inscrire"/>
-      </form>
+            <label className="label" htmlFor="password">
+                Mot de passe
+            </label>
+            <br />
+            <input
+                type="password"
+                name="password"
+                id="password"
+                {...register("password", { required: true })}
+                
+            />
+            {errors.password && <span>Le mot de passe est obligatoire</span>}
+            <br />
+
+            <input className="btn" type="submit" value="S'inscrire" />
+            
+        </form>
     );
 };
 

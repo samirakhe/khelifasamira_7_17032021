@@ -32,11 +32,24 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
 }
-.dateCommentaire{
+.dateTexte{
   font-size: 10px;
 }
+.datePseudo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1px;
+  width: 100%;
+ 
+ 
 
-
+}
+.pseudoUser{
+  font-size: 15px;
+  text-transform: capitalize;
+  
+}
 .card {
     -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -58,6 +71,28 @@
     padding:10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight:600;
+    text-align: center;
+  }
+
+  .btn {
+    
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 10px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white; 
+    color: black; 
+    border-radius: 15px;
+    box-shadow: 6px 6px 6px 2px #ada7a7;
   }
 
   #title{
@@ -72,3 +107,18 @@
     background-color: rgb(250, 231, 231);
     
   }
+
+  .titlePost{
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: center;
+  }
+  .errorMessage{
+    font-size: 10px;
+    font-weight: 300;
+    color:red;
+    margin-bottom: 15px;
+  }
+
+  

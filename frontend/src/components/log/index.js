@@ -4,7 +4,8 @@ import LoginForm from "./login";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material";
 import theme from "../../themes/default"
-//import css from "../../App.css"
+import "./log.css";
+
 
 const Log = ( props ) => {
     const [SignupModal, setSignupModal] = useState(props.signup);
@@ -23,7 +24,7 @@ const Log = ( props ) => {
     return (
         <div className="connection-form">
             <div className="form-container">
-                <ul>
+                <ul className="accountButton">
                     <ThemeProvider theme={theme}>
                         <Button 
                         color="primary" 
@@ -43,6 +44,7 @@ const Log = ( props ) => {
                         className={LoginModal ? "active-button" : null}>
                         Se Connecter
                         </Button>
+                        
                     </ThemeProvider>
                 </ul>
                 {SignupModal && <SignupForm />}

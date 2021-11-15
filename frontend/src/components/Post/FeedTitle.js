@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import './Feed.css';
+
 
 const FeedTitle = (props) => {
+    const [date, setDate] = useState("");
+    const options = {year: "numeric", month: "numeric", day: "numeric",
+           hour: "numeric", minute: "numeric", second: "numeric",
+           hour12: false};
+    useEffect(()=>{
+        const propsDate = new Date (props.date)
+        setDate(new Intl.DateTimeFormat('default', options).format(propsDate))
+    },[props.date])
+    
     return (
         <div>
-            <p>{props.pseudo}</p>
-            <p>{props.title}</p>
-            
+            <div className="datePseudo">
+                <p className="pseudoUser">{props.pseudo}</p>
+                <p className="dateTexte">{date}</p>
+            </div>
+
+            <div>
+                <p className="titlePost">{props.title}</p>
+            </div>           
         </div>
     )
 }

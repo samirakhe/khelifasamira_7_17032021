@@ -4,6 +4,8 @@ const passwordValidator = require("password-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Role = require("../models/roles");
+const Posts = require("../models/posts");
+const Commentaires = require("../models/commentaires");
 
 //Conditions password
 const passwordSchema = new passwordValidator();
@@ -46,10 +48,11 @@ exports.createUsers = async (req, res, next) => {
                     email: data.email,
                     password: data.password,
                     pseudo: data.pseudo,
+
                 })
                     .then((userCreated) => {
-                        Role.findOne({ where: { nameRole: "EMPLOYE" } }).then(
-                            (role) => {
+                        Role.findOne({ where: { nameRole: "EMPLOYE" } })
+                        .then((role) => {
                                 userCreated.setRoles([role]).then(() => {
                                     res.json(userCreated);
                                 });
@@ -89,12 +92,14 @@ exports.login = (req, res) => {
 
                         return res.status(401).json({
                             error: "Adresse email ou mot de passe incorrect",
+                        
                         });
                     }
                     res.status(200).json({
                         pseudo: user.pseudo,
                         email: user.email,
                         roles: user.roles,
+                        Userid: user.Userid,
                         token: jwt.sign(
                             { Userid: user.Userid },
                             process.env.RANDOM_SECRET_KEY,
@@ -168,12 +173,16 @@ exports.modifyUsers = (req, res) => {
     
 };
 
-exports.deleteUsers = (req, res) => {
-    User.destroy ({ where: { Userid : req.params.id}})
-    .then(() =>
-        res
+exports.deleteUsers = async (req, res) => {
+    try {
+    await Commentaires.destroy({where:{ Userid: req.params.id}})
+    await Posts.destroy({where:{ Userid: req.params.id}})
+    await User.destroy ({ where: { Userid : req.params.id}})
+    return res
             .status(200)
             .json({ message: "L'utilisateur est supprimé !" })
-    )
-    .catch((error) => res.status(400).json({ error }));
+    }
+    catch(error){
+        return res.status(400).json({ error });
+    };
 };

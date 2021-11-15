@@ -1,47 +1,35 @@
 import React, { useState } from 'react';
 import './log.css';
-import axios from 'axios';
-import axiosInstance from '../../config/axios.config';
+import {login} from '../../services/loginService';
+import Alert from '@mui/material/Alert';
 require("dotenv").config();
+
 
 
 const Login = () => {
 
    const [email, setEmail] =  useState("");
    const [password, setPassword] = useState("");
+   const [errorMessage, setErrorMessage] = useState("");
 
-  //  const emailError =  document.querySelector('.email.error');
-  //  const passwordError = document.querySelector('.password.error');
    
    const handleLogin = (e) => {
      e.preventDefault();
-     axiosInstance({
-       method: "post",
-       url:`/users/login`,
-       data:{
-         email,
-         password,
-       },
-     })
-     .then((userData)=>{
-       console.log(userData)
-      //  if(res.data.errors){
-      //    emailError.innerHTML =  res.data.errors.email;
-      //    passwordError.innerHTML = res.data.errors.password;
-      //  }else {
-      //    window.location = '/';
-      //  }
-      localStorage.setItem("connectedUser", JSON.stringify(userData.data));
-      window.location = '/';
-      localStorage.setItem("token", userData.data.token);
-      localStorage.setItem("pseudo", userData.data.pseudo);
-      localStorage.setItem("roles", JSON.stringify (userData.data.roles));
-     
-     })
-     .catch((err)=>{
-       console.log(err)
-     })
+    login(email, password)
+    .then((userData)=>{
+      console.log(userData)
+     localStorage.setItem("connectedUser", JSON.stringify(userData.data));
+     window.location = '/';
+     localStorage.setItem("token", userData.data.token);
+     localStorage.setItem("pseudo", userData.data.pseudo);
+     localStorage.setItem("roles", JSON.stringify (userData.data.roles));     
+    })
+    .catch((err)=>{
+      setErrorMessage(err.response.data.error)
+      console.log(err.response.data.error)
+    })
    }
+
 
 
     return(
@@ -69,13 +57,11 @@ const Login = () => {
           <div className="password error"></div>
           <br/>
 
-        <input className="button" type="submit" value="Se connecter"/>
+        <input className="btn" type="submit" value="Se connecter"/>
+        {errorMessage? <Alert severity="error">{errorMessage}</Alert> : <></>}
       </form>
     
     );
       
 };
-
-
-
 export default Login;
