@@ -34,19 +34,19 @@ const FormCommentaire = (props) => {
             id="FormCommentaire"
         >
             <label className="write-comment" htmlFor="texte">
-                Écrivez un commentaire
+                Laisser un commentaire :
             </label>
             <br />
             <input
                 type="text"
                 name="texte"
-                id="texte"
+                id="texte-comm"
                 onChange={(e) => setTexte(e.target.value)}
                 value={texte}
                
             />
             <br />
-            <input className="btn" type="submit" value="Poster" />
+            <input className="btn-comm" type="submit" value="OK" />
         </form>
     );
 };

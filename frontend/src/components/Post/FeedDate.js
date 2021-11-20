@@ -13,7 +13,7 @@ const FeedDate = (props) => {
     return (
     <>
     <div className="dateTexte">
-            {date}
+           <p>{date}</p> 
     </div>
     </>
     )

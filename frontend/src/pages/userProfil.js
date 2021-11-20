@@ -34,7 +34,7 @@ const UserProfil = (props) => {
 
     const deleteProfil = (e) => {
         e.preventDefault();
-        debugger;
+        
         axiosInstance({
             method: "delete",
             url: `/users/${userInformations.Userid}`,

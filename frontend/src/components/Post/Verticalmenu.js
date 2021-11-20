@@ -96,8 +96,6 @@ export default function LongMenu(props) {
                 <MenuItem onClick={deletedPost}>
                     <DeleteOutlineIcon />
                 </MenuItem>
-                 
-                
                 
             </Menu>
         </div>

@@ -17,7 +17,7 @@ const Login = () => {
      e.preventDefault();
     login(email, password)
     .then((userData)=>{
-      console.log(userData)
+    console.log(userData)
      localStorage.setItem("connectedUser", JSON.stringify(userData.data));
      window.location = '/';
      localStorage.setItem("token", userData.data.token);
@@ -34,9 +34,10 @@ const Login = () => {
 
     return(
       <form action="" onSubmit={handleLogin} id="loginForm">
-        <label className="label" htmlFor="email">Email</label>
+        <label className="label" htmlFor="email"></label>
         <br/>
         <input 
+        placeholder="Email"
           type="text" 
           name="email" 
           id="email" 
@@ -46,9 +47,10 @@ const Login = () => {
           <div className=" email error"></div>
 
         <br/>
-        <label className="label" htmlFor="password">Mot de passe</label>
+        <label className="label" htmlFor="password"></label>
         <br/>
         <input 
+         placeholder="Mot de passe"
           type="password" 
           name="password" 
           id="password" 

@@ -13,12 +13,15 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
 }
+ a{
+   color:green;
+ }
 
 .btn {
     
     border: none;
     color: white;
-    padding: 5px 10px;
+    
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -35,8 +38,16 @@
     box-shadow: 6px 6px 6px 2px #ada7a7;
   }
   
-
-  
+#register{
+  border:none;
+  background-color: white;
+  cursor: pointer;
+  text-decoration:underline;
+  font-weight: bold;
+}
+#register :hover{
+  color:red;
+}
   .btn:hover {
     background-color: tomato;
     color: white;
@@ -56,4 +67,9 @@
   #signupForm, #loginForm{
     text-align: center;
   }
+  #pseudo, #email, #password {
+    padding: 9px;
+    width: 76%;
+}
+  
   

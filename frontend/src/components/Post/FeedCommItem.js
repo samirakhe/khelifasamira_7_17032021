@@ -26,7 +26,7 @@ const [comment, setComment] = useState(props.data.commentaire);
             if (successDeleteComm) {
                 
                 props.delComment(props.data.Commentaireid);  
-                console.log("commenaire supprimé");
+                console.log("commentaire supprimé");
                 
             } else {
                 console.log("Action non autorisée");
@@ -35,7 +35,7 @@ const [comment, setComment] = useState(props.data.commentaire);
     };
 
     const upComment =  (newCommentaire) => {
-        debugger
+        
         setComment(newCommentaire.texte)
     }
 
@@ -46,10 +46,10 @@ const [comment, setComment] = useState(props.data.commentaire);
     
     return (
         <div className="bloc-commentaire">
-            <p className="pseudo">{props.data.user.pseudo}</p>
+            <p className="pseudo">Commentaire de : {props.data.user.pseudo}</p>
             <p className="comment">{comment}</p>
 
-            <FeedDate  date={props.data.createdAt} />
+            <FeedDate className="dateTexte"  date={props.data.createdAt}/>
             <div className="update-delete-comm">
             <Auth userConnected={true}>  
                 <UpdateComm commentaire={props.data} upComment={upComment} className="updateCom"/>

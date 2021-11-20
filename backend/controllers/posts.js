@@ -99,13 +99,42 @@ exports.createPosts = (req, res) => {
 
 
 exports.modifyPosts = (req, res) => {
+
     const id = req.params.id;
     const data = req.body;
-    Post.update(data, { where: { Postid: id } })
-    .then((newpost) => {
-        return res.json(newpost);
-    });
-};
+    const postImage = req.file ? {...JSON.parse(req.body),
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename }`}
+    : { ...req.body };
+    if (req.file) {
+    const filename = posts.imageUrl.split("/images")[1];
+    fs.unlinkSync("images/" + filename);
+}
+Post.update(data, { where: { Postid: id } }, {...postImage})
+.then((newpost) => {
+    return res.json(newpost);
+})}
+
+
+
+
+
+// exports.modifyPosts = (req, res) => {
+    
+//     const id = req.params.id;
+//     const data = req.body;
+    
+//     Post.update(data, { where: { Postid: id } })
+//     .then((newpost) => {
+//         return res.json(newpost);
+//     });
+// };
+
+
+
+
+
+
+
 
 exports.deletePosts = async (req, res) => {
     try {

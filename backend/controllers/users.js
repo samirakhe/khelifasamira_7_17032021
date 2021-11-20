@@ -53,7 +53,8 @@ exports.createUsers = async (req, res, next) => {
                     .then((userCreated) => {
                         Role.findOne({ where: { nameRole: "EMPLOYE" } })
                         .then((role) => {
-                                userCreated.setRoles([role]).then(() => {
+                                userCreated.setRoles([role])
+                                .then(() => {
                                     res.json(userCreated);
                                 });
                             }
@@ -63,10 +64,7 @@ exports.createUsers = async (req, res, next) => {
             })
             .catch((error) => res.status(500).json({ error }));
     } else {
-        return res.json({
-            message:
-                "Votre mot de passe ne contient pas les caractères attendus",
-        });
+        return res.status(401).json({ message:"Votre mot de passe ne contient pas les caractères attendus" });
     }
 };
 
@@ -80,9 +78,7 @@ exports.login = (req, res) => {
             console.log(userData);
             const user = userData;
             if (!user) {
-                return res
-                    .status(401)
-                    .json({ error: "Adresse email ou mot de passe incorrect" });
+                return res.status(401).json({ error: "Adresse email ou mot de passe incorrect" });
             }
             bcrypt
                 .compare(data.password, user.password)
@@ -90,10 +86,7 @@ exports.login = (req, res) => {
                     console.log('valide', valid)
                     if (!valid) {
 
-                        return res.status(401).json({
-                            error: "Adresse email ou mot de passe incorrect",
-                        
-                        });
+                        return res.status(401).json({ error: "Adresse email ou mot de passe incorrect" });
                     }
                     res.status(200).json({
                         pseudo: user.pseudo,

@@ -15,8 +15,8 @@ const FeedTitle = (props) => {
     return (
         <div>
             <div className="datePseudo">
-                <p className="pseudoUser">{props.pseudo}</p>
-                <p className="dateTexte">{date}</p>
+                <p className="pseudoUser">De : {props.pseudo}</p>
+                <p className="dateTexte">Le {date}</p>
             </div>
 
             <div>

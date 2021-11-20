@@ -79,10 +79,11 @@ export default function Feed(props) {
                                 post={props.post}
                             />
                         </IsOwner>
-                    </IconButton>
+                    </IconButton>              
                 }
-                title={
-                    <FeedTitle
+                
+                title={               
+                    <FeedTitle className="feedtitle"
                         date={props.post.createdAt}
                         pseudo={props.post.user.pseudo}
                         title={props.post.title}
@@ -92,13 +93,11 @@ export default function Feed(props) {
 
             <CardContent className="cardcontent">
                 
-                { props.post.image && <CardMedia
-
-                    component="img"
-                   
-                    image={props.post.image}
-                    
+                {props.post.image && <CardMedia
+                    component="img"    
+                    image={props.post.image}          
                 />}
+                <br/>
                 <Typography variant="body2" color="text.secondary">
                     {props.post.texte}
                 </Typography>

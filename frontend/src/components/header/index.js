@@ -11,7 +11,7 @@ const Header = (props) =>{
           <div className="banniere">
               <a href="/"><img src={logo} className="logo-groupomania" alt="logo"/></a>
               <Auth userConnected={false}>
-                <p className = "accountIcon"><Button color="neutral" href="/profil"><FaUserAlt/></Button></p>
+                <p className = "accountIcon"><Button color="secondary" href="/profil"><FaUserAlt/></Button></p>
               </Auth>
               <Auth userConnected={true}>
               <MenuLogout className="accountIcon"/>

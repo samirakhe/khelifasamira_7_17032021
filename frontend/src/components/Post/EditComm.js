@@ -30,13 +30,13 @@ const EditComm = (props) => {
       })
     }
     return(
-        <form className="formulaire" action="" onSubmit={handleFormComm} id="FormPost">  
+        <form className="form-update-comm" action="" onSubmit={handleFormComm} id="FormPost">  
         <label htmlFor="texte">Votre Message</label>
         <br/>
         <input 
           type="text-area" 
           name="texte" 
-          id="texte" 
+          id="comm-update" 
           onChange={(e) => setTexte(e.target.value)} 
           value={texte}/>
 
@@ -44,7 +44,7 @@ const EditComm = (props) => {
 
         <br/>
         
-        <input  type="submit" value="Modifier"/>
+        <input className="btn-comm"  type="submit" value="ok"/>
       </form>
     );
 };

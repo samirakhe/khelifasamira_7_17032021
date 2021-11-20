@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SignupForm from "./signup";
-import LoginForm from "./login";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material";
 import theme from "../../themes/default"
@@ -25,7 +25,27 @@ const Log = ( props ) => {
         <div className="connection-form">
             <div className="form-container">
                 <ul className="accountButton">
+                    
                     <ThemeProvider theme={theme}>
+                        <Button 
+                        color="primary" 
+                        variant="contained"
+                        onClick={handleModals} 
+                        id="login"
+                        className={LoginModal ? "active-button" : null}>
+                        Connexion
+                        </Button>       
+                    </ThemeProvider>
+                    <br/>
+                    <p>Vous n'avez pas encore de compte ? 
+                        <button 
+                            onClick={handleModals} 
+                            id="register" 
+                            className={SignupModal ? "active-button" : null}>
+                                Créer un compte
+                        </button>
+                    </p>
+                    {/* <ThemeProvider theme={theme}>
                         <Button 
                         color="primary" 
                         variant="contained"
@@ -34,18 +54,7 @@ const Log = ( props ) => {
                         className={SignupModal ? "active-button" : null}>
                         Créer un compte
                         </Button>
-                    </ThemeProvider>
-                    <ThemeProvider theme={theme}>
-                        <Button 
-                        color="primary" 
-                        variant="contained"
-                        onClick={handleModals} 
-                        id="login"
-                        className={LoginModal ? "active-button" : null}>
-                        Se Connecter
-                        </Button>
-                        
-                    </ThemeProvider>
+                    </ThemeProvider> */}
                 </ul>
                 {SignupModal && <SignupForm />}
                 {LoginModal && <LoginForm />}
