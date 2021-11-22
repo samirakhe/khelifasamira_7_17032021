@@ -37,6 +37,7 @@ const FormPost = (props) => {
     }
 
     const handleFormPost = (data) => {
+        
         const formData = new FormData();
         if (data.image.length > 0) {
             formData.append("image", data.image[0]);
@@ -110,7 +111,7 @@ const FormPost = (props) => {
 
             <br />
             
-            <label for="image" className="label-file">
+            <label htmlFor="image" className="label-file">
             <p>Choisir une image <PhotoCameraIcon/></p>  
             </label>
             <input

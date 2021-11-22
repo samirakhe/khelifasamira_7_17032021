@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media screen and (max-width: 768px)
+{
+    .bloc_page{
+        max-width: 768px;
+    }
+    
+  }

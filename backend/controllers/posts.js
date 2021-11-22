@@ -8,6 +8,7 @@ const User = require("../models/user");
 const Commentaires = require("../models/commentaires");
 const sequelize = require("../models/db");
 const multer = require('multer');
+const fs = require('fs');
 require("dotenv").config();
 
 exports.getAllposts = (req, res) => {
@@ -98,21 +99,44 @@ exports.createPosts = (req, res) => {
 
 
 
-exports.modifyPosts = (req, res) => {
+exports.modifyPosts = async (req, res) => {
 
     const id = req.params.id;
-    const data = req.body;
-    const postImage = req.file ? {...JSON.parse(req.body),
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename }`}
+    //on vérifie si un fichier eest passé quand l'user fait la requete, si oui on cree un objet post avec une nouvelle iamge qui correspond a limage passer par l'user
+    //et sil n'y a pas de fichier on cree un nouvel objet post
+    const postImage = req.file ? {...req.body,image: `${req.protocol}://${req.get("host")}/images/${req.file.filename }`}
     : { ...req.body };
-    if (req.file) {
-    const filename = posts.imageUrl.split("/images")[1];
-    fs.unlinkSync("images/" + filename);
+  
+    try {
+        //on recupere le post a parti de l'id du post de l'id de l'user pour s'assurer le l'user est le proprietaire du post
+        const post = await Post.findOne({
+            where: { Postid: req.params.id, Userid: req.user.Userid },
+        });
+        // si aucun post n'est trouvé on renvoie un message d'erreur
+        if (!post) {
+            return res.status(401).json("Action non autorisée");
+        }
+        //on modifie le post quand l'id du post correpsond a l'id placé en paramètre dans l'url
+        const response = await Post.update(postImage, { where: { Postid: id } })
+        //on verifie si l'ancien post a une image et que l'user passe une nouvelle image(req.fil = nouvelle image)
+        if(post.image && req.file){
+            //on récupere le nom de l'image de l'ancien post
+            const filename = post.image.split("images/")[1];
+            //on verifie si cette image existe en tant que fichier(elle pourrait etre un attribut par exmeple), et si oui, on la supprime
+            if(fs.existsSync("backend/images/" + filename)){
+                fs.unlinkSync("backend/images/" + filename);
+            }         
+        }
+        const updatedPost = await Post.findByPk(id)
+        return res.json(updatedPost);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json("Erreur interne du serveur");
+    }
+    
 }
-Post.update(data, { where: { Postid: id } }, {...postImage})
-.then((newpost) => {
-    return res.json(newpost);
-})}
+    
+
 
 
 

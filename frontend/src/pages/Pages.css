@@ -1,10 +1,10 @@
-.user-profil{
+.user-profil {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin: 50px 150px 0px 150px;
 }
-.user-info{
+.user-info {
     align-items: center;
     vertical-align: center;
 }
@@ -13,8 +13,57 @@
     box-shadow: 10px 5px 5px grey;
     width: 40%;
     padding: 20px;
-    
 }
-h2{
+h2 {
     text-align: center;
 }
+.btn-myaccount {
+    background-color: #fef9f7;
+    color: black;
+    padding: 12px 28px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: solid 1px #fd4f2b;
+    border-radius: 11px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.btn-myaccount:hover {
+    background-color: #fd4f2b;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .user-profil {
+        flex-wrap: wrap;
+        width: 90%;
+        margin: auto;
+        justify-content: space-around;
+    }
+    .user-info {
+        position: relative;
+        width: 100%;
+        margin: 0;
+    }
+    .deleteButton {
+        width: 100%;
+        position: relative;
+    }
+    h1{
+        text-align: center;
+    }
+    .btn-myaccount {
+        padding: 7px 13px;
+        font-size: 10px;
+        margin: 4px 15px;
+    }
+}
+
+     

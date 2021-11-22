@@ -21,7 +21,6 @@
     
     border: none;
     color: white;
-    
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -44,9 +43,10 @@
   cursor: pointer;
   text-decoration:underline;
   font-weight: bold;
+  color:black;
 }
-#register :hover{
-  color:red;
+#register:hover{
+  color:#fd4f2b;
 }
   .btn:hover {
     background-color: tomato;

@@ -32,6 +32,7 @@ const Home = () => {
         const findPost = postsArray[postIndex];
         findPost.title = data.title;
         findPost.texte = data.texte;
+        findPost.image = data.image;
 
         postsArray[postIndex] = findPost;
         setPosts(postsArray)

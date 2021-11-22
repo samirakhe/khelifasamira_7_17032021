@@ -208,4 +208,11 @@
     text-align: center;
   }
 
+  @media screen and (max-width: 768px) {
+
+    #cardmedia{
+      width: 50%;
+      text-align: center;
+    }
+  }
   

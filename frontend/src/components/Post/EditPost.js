@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../config/axios.config';
 import "./Feed.css";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
@@ -9,58 +9,57 @@ import { useForm } from "react-hook-form";
 
 const EditPost = (props) => {
 
-    //const [Userid, setUserid] = useState("");
-    const [title, setTitle] =  useState(props.post.title);
-    const [texte, setTexte] = useState(props.post.texte);
     const {register, handleSubmit,setError,formState: { errors },clearErrors, setValue,reset} = useForm();
-    const [img, setImg] = useState("");
+    const [imag, setImag] = useState("");
     const MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
+
+    setValue("title", props.post.title);
+    setValue("texte", props.post.texte);
     
+    function readurl(e) {
+      const input = e.target;
+
+      if (input.files && input.files[0]) {
+          const file = input.files[0];
+          if (!MIME_TYPES.includes(file.type)) {
+              setError("image", {
+                  type: "manual",
+                  message: "Fichier non autorisé !",
+              });
+              input.value = null;
+              setValue("image", null); // effacer dans source
+              setImag(""); //effacer après le post
+              return;
+          }
+          clearErrors("image");
+          const reader = new FileReader();
+          reader.onload = function (e) {
+              setImag(e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
 
 
-    function readURL(e) {
-        const input = e.target;
-
-        if (input.files && input.files[0]) {
-            const file = input.files[0];
-            if (!MIME_TYPES.includes(file.type)) {
-                setError("image", {
-                    type: "manual",
-                    message: "Fichier non autorisé !",
-                });
-                input.value = null;
-                setValue("image", null); // effacer dans source
-                setImg(""); //effacer après le post
-                return;
-            }
-            clearErrors("image");
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                setImg(e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    
-    const handleFormPost = (e) => {
-        e.preventDefault();
-        
-        axiosInstance({
-          method: "put",
-          url:`/posts/${props.post.Postid}`,
-          
-          data:{
-            title,
-            texte,
+    const handleFormPost = (data) => {
+      const formData = new FormData();
+      if (data.image.length > 0) {
+          formData.append("image", data.image[0]);
+      }
+      formData.append("title", data.title);
+      formData.append("texte", data.texte);
+  
+      const config = {
+          headers: {
+              "content-type": "multipart/form-data",
           },
-          
-        })
+      };
+        axiosInstance.put(`/posts/${props.post.Postid}`, formData, config)
+
         .then((newPost)=>{
           console.log(newPost)
-          const data = {title:title, texte:texte}
+          const data = newPost.data;
           props.upPost(props.post.Postid, data)
-          setTitle('');
-          setTexte('');
           props.handleClose();
          
         })
@@ -70,17 +69,19 @@ const EditPost = (props) => {
       }
 
     return(
-        <form className="formulaire" action="" onSubmit={handleFormPost} id="FormPost">
+        <form className="formulaire" action="" onSubmit={handleSubmit(handleFormPost)} id="editPost">
         <label htmlFor="title">Sujet</label>
         <br/>
         <input 
           type="text" 
           name="title" 
           id="title" 
-          onChange={(e) => setTitle(e.target.value)} 
-          value={title}/>
-
-          <div className="title error"></div>
+          {...register("title", { required: true })}
+          />
+            <br />
+            {errors.title && (
+                <span className="errorMessage">Le titre est obligatoire</span>
+            )}
 
         <br/>
         <label htmlFor="texte">Votre Message</label>
@@ -89,32 +90,34 @@ const EditPost = (props) => {
           type="text-area" 
           name="texte" 
           id="texte" 
-          onChange={(e) => setTexte(e.target.value)} 
-          value={texte}/>
+          {...register("texte", { required: true })}
+          />
+          <br />
+          {errors.texte && (
+              <span className="errorMessage">Écrivez quelque chose</span>
+          )}
 
-          <div className=" texte error"></div>
+          <br />
 
-        <br/>
-
-        <label for="image" className="label-file">
+        <label for="imge" className="label-file">
             <p>Choisir une image <PhotoCameraIcon/></p>  
             </label>
             <input
                 type="file"
                 accept="image/jpeg, image/jpg, image/png"
                 name="image"
-                id="image"
+                id="imge"
                 className="input-file"
                 placeholder="Ajouter une image"
                 {...register("image", {
-                    onChange: readURL,
+                    onChange: readurl,
                 })}
             />
          
             {errors.image && (
                 <span className="errorMessage">{errors.image.message}</span>
             )}
-            <img className="preview" src={img}></img><br/>
+            <img className="preview" src={imag}></img><br/>
         
         <input type="submit" value="Modifier"/>
       </form>

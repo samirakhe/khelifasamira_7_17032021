@@ -14,8 +14,10 @@ const Signup = () => {
         formState: { errors },
     } = useForm();
     const [successAlert, setSuccessAlert] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showErrorMessage, setShowErrorMessage] =  useState(false);
 
+    
     const handleSignup = (data) => {
         axiosInstance({
             method: "post",
@@ -44,14 +46,18 @@ const Signup = () => {
                             JSON.stringify(userData.data.roles)
                         );
                         setErrorMessage('');
+                        setShowErrorMessage(false);
                     })
                     .catch((err) => {
                         console.log(err.response.data.message);
+                        setErrorMessage(err.response.data.message);
+                        setShowErrorMessage(true);
                     });
             })
             .catch((err) => {
-                setErrorMessage(true);
-                console.log(err);
+                setErrorMessage(err.response.data.message);
+                setShowErrorMessage(true);
+                console.log(err.response.data.message);
             });
         console.log(data);
     };
@@ -124,7 +130,7 @@ const Signup = () => {
                 </Alert>
             )}
 
-            {errorMessage ? <Alert severity="error">Votre mot de passe ne contient pas les caractères attendus</Alert> : <></>}
+            {showErrorMessage ? <Alert severity="error">{errorMessage}</Alert> : <></>}
         </form>
     );
 };

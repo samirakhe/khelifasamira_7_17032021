@@ -30,13 +30,17 @@ passwordSchema
 exports.createUsers = async (req, res, next) => {
     const data = { ...req.body };
     try {
-        const user = await User.findOne({ where: { email: data.email } });
+        let user = await User.findOne({ where: { email: data.email } });
         if (user) {
-            res.status(400).json("Adresse email déjà utilisée");
+            return res.status(400).json({message: "Adresse email déjà utilisée"});
+        }
+        user = await User.findOne({ where: { pseudo: data.pseudo } });
+        if (user) {
+            return res.status(400).json({message: "Ce pseudo est déjà utilisée"});
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json("Erreur interne du serveur");
+        return res.status(500).json({message : "Erreur interne du serveur"});
     }
 
     if (passwordSchema.validate(data.password)) {

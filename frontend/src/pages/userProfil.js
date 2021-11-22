@@ -69,6 +69,7 @@ const UserProfil = (props) => {
 
             <div className="user-info">
                 <h2>Mes informations de connexion</h2>
+                
                 <p>Pseudo : {userInformations.pseudo} </p>
                 <p>Email : {userInformations.email} </p>
                 <Button

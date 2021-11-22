@@ -94,6 +94,8 @@ export default function Feed(props) {
             <CardContent className="cardcontent">
                 
                 {props.post.image && <CardMedia
+                id="cardmedia"
+
                     component="img"    
                     image={props.post.image}          
                 />}
