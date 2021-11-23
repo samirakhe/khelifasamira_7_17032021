@@ -1,7 +1,5 @@
 import React from 'react';
 import logo from '../../images/logo.png';
-import { FaUserAlt } from 'react-icons/fa';
-import Button from '@mui/material/Button';
 import Auth from '../auth';
 import MenuLogout from '../log/menuLogout';
 

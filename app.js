@@ -19,7 +19,6 @@ app.use((req, res, next) => {
 
 
 
-//ajoutés seule lors de mes tests images
 app.use(cors());
 app.use('/images', express.static(path.join(__dirname, 'backend/images')));
 

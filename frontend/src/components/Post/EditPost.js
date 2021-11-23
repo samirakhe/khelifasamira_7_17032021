@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import axiosInstance from '../../config/axios.config';
 import "./Feed.css";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 
 const EditPost = (props) => {
 
-    const {register, handleSubmit,setError,formState: { errors },clearErrors, setValue,reset} = useForm();
+    const {register, handleSubmit,setError,formState: { errors },clearErrors, setValue} = useForm();
     const [imag, setImag] = useState("");
     const MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -117,9 +117,9 @@ const EditPost = (props) => {
             {errors.image && (
                 <span className="errorMessage">{errors.image.message}</span>
             )}
-            <img className="preview" src={imag}></img><br/>
+            <img className="preview"   src={imag}></img><br/>
         
-        <input type="submit" value="Modifier"/>
+        <input className="btn" type="submit"  value="Modifier"/>
       </form>
     );
 };

@@ -11,7 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CardMedia from '@mui/material/CardMedia';
 import FeedTitle from "./FeedTitle";
-import FeedDate from "./FeedDate";
 import FeedComm from "./FeedComm";
 import Verticalmenu from "./Verticalmenu";
 import "./Feed.css";

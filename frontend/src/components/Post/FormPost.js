@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import axiosInstance from "../../config/axios.config";
 import { useForm } from "react-hook-form";
 import "./Feed.css";

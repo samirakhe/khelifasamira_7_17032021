@@ -12,7 +12,7 @@ db.sync()
 
 
 
-app.set("port", 3001);
+app.set("port",process.env.REACT_APP_API_URL);
 const server = http.createServer(app);
 server.listen(3001, (req, res) => {
     console.log("URL server : http://localhost:" + 3001);

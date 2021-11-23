@@ -72,4 +72,16 @@
     width: 76%;
 }
   
-  
+@media screen and (max-width: 768px) {
+
+  #loginForm, #signupForm{
+    position: relative;
+    width: 70%;
+    margin: auto;
+    
+  }
+  .btn{
+    width: 100%;
+    font-size: 14px;
+  }
+}
