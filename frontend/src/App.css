@@ -32,8 +32,9 @@ header {
     border-top:1px solid #fd2d01;
     padding: 50px;
     margin-top: 50px;
-    position: relative;
-    bottom:0;
+    position:absolute;
+    width: 100%;
+    bottom: 0;
   
 }
 

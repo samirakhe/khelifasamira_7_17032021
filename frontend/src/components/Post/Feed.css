@@ -212,7 +212,7 @@
   @media screen and (max-width: 768px) {
 
     #cardmedia{
-      width: 50%;
+      width: 100%;
       margin: auto;
     }
     #texte-comm {
@@ -224,5 +224,9 @@
       padding: 15px;
       background-color: rgba(128, 128, 128, 0.082);
   }
-  }
+  .card {
   
+    max-width: 70%;
+    
+  }
+}

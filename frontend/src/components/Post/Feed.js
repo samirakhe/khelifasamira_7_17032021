@@ -67,7 +67,7 @@ export default function Feed(props) {
     };
 
     return (
-        <Card className="card" sx={{ maxWidth: 345 }}>
+        <Card className="card" >
             <CardHeader
                 action={
                     <IconButton aria-label="settings">

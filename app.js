@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql2');
-const userRoutes = require('./backend/routes/users');
-const postRoutes = require('./backend/routes/posts');
-const commentaireRoutes =  require('./backend/routes/commentaires');
-const likesRoutes = require('./backend/routes/likes');
 const multer = require('multer')
 const path = require('path')
 const cors = require("cors");
 const bodyParser = require('body-parser');
+
+const userRoutes = require('./backend/routes/users');
+const postRoutes = require('./backend/routes/posts');
+const commentaireRoutes =  require('./backend/routes/commentaires');
+const likesRoutes = require('./backend/routes/likes');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
