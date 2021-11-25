@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import axiosInstance from '../../config/axios.config';
 import Badge from "@mui/material/Badge";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -7,13 +7,7 @@ import Auth from "../auth";
 
 const Likes = (props) => {
     const [likes, setLikes] = useState(props.likes);
-    const [likeCount, setLikeCount] = useState(0);
-
-    useEffect(()=>{
-        console.log('likes ont changés');
-        setLikeCount(likes.filter(like=>like.isActive).length);
-
-    },[]);
+    const [likeCount, setLikeCount] = useState(props.likes.filter(like=>like.isActive).length);
 
     const executeLike = (e) => {
         e.preventDefault();

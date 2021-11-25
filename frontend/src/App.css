@@ -1,10 +1,13 @@
 body {
-    margin: 10px 25px 0 25px;
+    margin: auto;
+    overflow-x: hidden;
+    width: 100%;
   
 }
 header {
     width: 100%;
     background-color: #fcded62f;
+    margin:auto;
 }
 .banniere {
     width: 100%;
@@ -13,9 +16,11 @@ header {
     justify-content: space-between;
     border-bottom: 1px solid #fd2d01;
     align-items: center;
+    margin:auto;
 }
 .logo-groupomania {
     width: 30%;
+    margin-left:20px;
 }
 .footer ul {
     display: flex;
@@ -23,18 +28,20 @@ header {
     list-style-type: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
+    margin: auto;
    
 }
 .footer {
     background-color: #fcded62f;
     border-top:1px solid #fd2d01;
-    padding: 50px;
+    padding: 30px;
     margin-top: 50px;
     position:absolute;
     width: 100%;
     bottom: 0;
+    
   
 }
 

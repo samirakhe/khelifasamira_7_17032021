@@ -10,13 +10,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const UserProfil = (props) => {
     const [userInformations, setUserInformations] = useState({});
-    const history = useHistory();
+    const history = useHistory();  
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     useEffect(() => {
-        const userInfo = localStorage.getItem("connectedUser");
+         const userInfo = localStorage.getItem("connectedUser");
         if (!userInfo) {
             history.push("/");
         } else {

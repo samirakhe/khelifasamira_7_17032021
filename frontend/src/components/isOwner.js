@@ -10,7 +10,7 @@ useEffect(()=>{
 
     const connectedUser = localStorage.getItem('pseudo'); 
     setPseudo(connectedUser)   
-})
+},[])
     return (
         <>
             {props.user===pseudo? props.children:<></>}      

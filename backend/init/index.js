@@ -2,6 +2,7 @@ const Role = require("../models/roles");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const db = require('../models/db');
+require("dotenv").config();
 
 exports.initRoles = async () => {
     const roles = await Role.findAll();
@@ -13,22 +14,22 @@ exports.initRoles = async () => {
 }
 
 exports.initAdmin = () => {
-    User.findOne({ where : {email : 'adminocr@gmail.com'}})
+    User.findOne({ where : {email : process.env.ADMIN_EMAIL}})
     .then((user)=>{
         if(user){
             return;
         }
         Role.findAll()
         .then((roles)=> {
-            console.log(roles[0].Roleid)
+            
             bcrypt
-            .hash('adminOCR78', 10)
+            .hash(process.env.ADMIN_PASSWORD, 10)
             .then((hash) => {
                 const password = hash;
                 User.create({
-                    email: 'adminocr@gmail.com',
+                    email: process.env.ADMIN_EMAIL,
                     password: password,
-                    pseudo: 'adminOCR',
+                    pseudo: process.env.ADMIN_PSEUDO,
                     
                 })
                     .then((user) => {

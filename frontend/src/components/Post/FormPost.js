@@ -129,7 +129,10 @@ const FormPost = (props) => {
             {errors.image && (
                 <span className="errorMessage">{errors.image.message}</span>
             )}
-            <img className="preview" src={img}></img><br/>
+            {!errors.image && img && (
+                <img className="preview" alt="preview" src={img}></img>
+            )}
+            <br/>
             <input className="btn" id="file" type="submit" value="Publier" />
         </form>
     );

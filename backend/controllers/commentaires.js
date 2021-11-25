@@ -5,15 +5,6 @@ const Commentaire = require("../models/commentaires");
 const Post = require("../models/posts");
 require("dotenv").config();
 
-exports.getAllCom = (req, res) => {
-    Commentaire.findAll()
-        .then((commentaire) => {
-            res.json(commentaire);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-};
 
 exports.createComm = (req, res) => {
     const comm = req.body;
@@ -26,19 +17,25 @@ exports.createComm = (req, res) => {
             });
         })
         .catch((err) => {
-            console.log(err);
+            //console.log(err);
             res.status(500).send("Erreur server");
         });
 };
 
 exports.modifyComm = (req, res) => {
     const id = req.params.id;
+    const userid= req.user.Userid;
     const data = req.body;
-    Commentaire.update(data, { where: { Commentaireid: id } }).then(
+    Commentaire.update(data, { where: { Commentaireid: id, Userid: userid  }  })
+    .then(
         (newcomm) => {
             return res.json(newcomm);
         }
-    );
+    )
+    .catch((err) =>{
+        //console.log(err)
+        res.status(500).send("Erreur server");
+    });
 };
 
 exports.deleteComm = async (req, res) => {
@@ -51,7 +48,7 @@ exports.deleteComm = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json("Erreur interne du serveur");
+        return res.status(500).json("Erreur interne du serveur");
     }
     Commentaire.destroy({
         where: { Commentaireid: req.params.id, Userid: req.user.Userid },
@@ -73,5 +70,15 @@ exports.deleteCommbyAdmin = (req, res) => {
         .catch((error) => {
             console.log(error);
             res.status(400).json("Erreur interne du serveur");
+        });
+};
+
+exports.getAllCom = (req, res) => {
+    Commentaire.findAll()
+        .then((commentaire) => {
+            res.json(commentaire);
+        })
+        .catch((err) => {
+            console.log(err);
         });
 };

@@ -117,7 +117,11 @@ const EditPost = (props) => {
             {errors.image && (
                 <span className="errorMessage">{errors.image.message}</span>
             )}
-            <img className="preview"   src={imag}></img><br/>
+            {!errors.image && imag && (
+                <img className="preview"  alt="preview" src={imag}></img>
+            )}
+            <br/>
+            
         
         <input className="btn" type="submit"  value="Modifier"/>
       </form>

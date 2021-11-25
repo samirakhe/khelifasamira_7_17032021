@@ -10,7 +10,7 @@ useEffect(()=>{
     }else{
         setIsConnected(false)
     }
-})
+},[])
     return (
         <>
             {props.userConnected===isConnected? props.children:<></>}

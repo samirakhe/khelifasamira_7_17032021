@@ -2,6 +2,7 @@ const http = require("http");
 const app = require("./app");
 const db =  require('./backend/models/init');
 const init = require('./backend/init');
+require("dotenv").config();
 
 
 db.sync()
@@ -12,8 +13,8 @@ db.sync()
 
 
 
-app.set("port", 3001);
+app.set("port", process.env.SERVER_PORT);
 const server = http.createServer(app);
-server.listen(3001, (req, res) => {
-    console.log("URL server : http://localhost:" + 3001);
+server.listen(process.env.SERVER_PORT, (req, res) => {
+    console.log("URL server : http://localhost:" + process.env.SERVER_PORT);
 });
