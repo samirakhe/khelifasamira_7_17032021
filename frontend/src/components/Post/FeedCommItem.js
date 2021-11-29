@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import FeedDate from "./FeedDate";
 import './Feed.css';
 import axiosInstance from '../../config/axios.config';
-
 import Auth from "../auth";
-
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import UpdateComm from "./UpdateComm";
 
@@ -16,15 +14,13 @@ const [comment, setComment] = useState(props.data.commentaire);
 
     const deleteComment = (e) => {
         e.preventDefault();
-     
-    
         axiosInstance({
             method: "delete",
             url: `/commentaires/${props.data.Commentaireid}`,
             
-        }).then((successDeleteComm) => {
-            if (successDeleteComm) {
-                
+        })
+        .then((successDeleteComm) => {
+            if (successDeleteComm) { 
                 props.delComment(props.data.Commentaireid);  
                 console.log("commentaire supprimé");
                 
@@ -33,9 +29,7 @@ const [comment, setComment] = useState(props.data.commentaire);
             }
         });
     };
-
     const upComment =  (newCommentaire) => {
-        
         setComment(newCommentaire.texte)
     }
 

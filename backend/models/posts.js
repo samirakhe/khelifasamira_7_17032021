@@ -1,8 +1,6 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./db');
-const User = require('./user');
-
-
+const db = require("./db");
+const User = require("./user");
 
 const Post = db.define("Post", {
     Postid: {
@@ -20,14 +18,11 @@ const Post = db.define("Post", {
         allowNull: false,
         validate: {
             notNull: { msg: "Le champs est obligatoire" },
-          },
+        },
     },
     image: {
-       type: DataTypes.STRING,
+        type: DataTypes.STRING,
     },
-
-    
 });
-
 
 module.exports = Post;

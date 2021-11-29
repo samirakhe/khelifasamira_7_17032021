@@ -4,6 +4,7 @@ import Home from '../../pages/home';
 import Profil from '../../pages/profil';
 import UserProfil from '../../pages/userProfil';
 
+
 const index = () => {
     return(
         <Router>
@@ -13,6 +14,7 @@ const index = () => {
                 <Route path= "/userprofil" exact component={UserProfil}/>
             </Switch>
         </Router>
+        
     );
 };
 

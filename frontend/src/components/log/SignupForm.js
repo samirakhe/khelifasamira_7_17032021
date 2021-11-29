@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { login } from "../../services/loginService";
 import Alert from "@mui/material/Alert";
 
-
+//Utilisation de react useform
 const Signup = () => {
     const {
         register,
@@ -14,9 +14,8 @@ const Signup = () => {
     } = useForm();
     const [successAlert, setSuccessAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [showErrorMessage, setShowErrorMessage] =  useState(false);
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-    
     const handleSignup = (data) => {
         axiosInstance({
             method: "post",
@@ -37,14 +36,14 @@ const Signup = () => {
                             "connectedUser",
                             JSON.stringify(userData.data)
                         );
-                        
+
                         localStorage.setItem("token", userData.data.token);
                         localStorage.setItem("pseudo", userData.data.pseudo);
                         localStorage.setItem(
                             "roles",
                             JSON.stringify(userData.data.roles)
                         );
-                        setErrorMessage('');
+                        setErrorMessage("");
                         setShowErrorMessage(false);
                     })
                     .catch((err) => {
@@ -63,62 +62,59 @@ const Signup = () => {
 
     return (
         <form action="" onSubmit={handleSubmit(handleSignup)} id="signupForm">
-            
             <label className="label" htmlFor="pseudo"></label>
             <br />
 
             <input
-            placeholder="Pseudo"
+                placeholder="Pseudo"
                 type="text"
                 name="pseudo"
                 id="pseudo"
                 {...register("pseudo", { required: true })}
             />
-            <br/>
+            <br />
             {errors.pseudo && <span>Le pseudo est obligatoire</span>}
             <br />
 
             <label className="label" htmlFor="email"></label>
             <br />
             <input
-            placeholder="Email"
+                placeholder="Email"
                 type="email"
                 name="email"
                 id="email"
-                {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i})}
+                //on utilise pattern afin de conditonner les adresses email
+                {...register("email", {
+                    required: true,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
             />
-            <br/>
-            {errors.email && errors.email.type === "required" && <span>L'email est obligatoire</span>}
-            {errors.email && errors.email.type === "pattern" && <span>Entrez une adresse email correcte</span>}
+            <br />
+            {errors.email && errors.email.type === "required" && (
+                <span>L'email est obligatoire</span>
+            )}
+            {errors.email && errors.email.type === "pattern" && (
+                <span>Entrez une adresse email correcte</span>
+            )}
             <br />
 
             <label className="label" htmlFor="password"></label>
             <br />
             <input
-            placeholder="Mot de passe"
+                placeholder="Mot de passe"
                 type="password"
                 name="password"
                 id="password"
-                {...register("password", { required: true, minLength: 8 } )}
-               
+                {...register("password", { required: true, minLength: 8 })}
             />
-            <br/>
-            {errors.password && errors.password.type === "required" && <span>Le mot de passe est obligatoire</span>}
-            {errors.password && errors.password.type === "minLength" && <span>Le mot de passe doit contenir min 8 caractères</span>}
             <br />
-
-            {/* <label className="label" htmlFor="confirmpassword"></label>
+            {errors.password && errors.password.type === "required" && (
+                <span>Le mot de passe est obligatoire</span>
+            )}
+            {errors.password && errors.password.type === "minLength" && (
+                <span>Le mot de passe doit contenir min 8 caractères</span>
+            )}
             <br />
-            <input
-            placeholder="Confirmer le mot de passe"
-                type="password"
-                name="confirmpassword"
-                id="password"
-                {...register("confirmpassword", { required: true })}
-            />
-            <br/>
-            {errors.password && <span>Le mot de passe est obligatoire</span>}
-            <br /> */}
 
             <input className="btn" type="submit" value="S'inscrire" />
             <br />
@@ -129,7 +125,11 @@ const Signup = () => {
                 </Alert>
             )}
 
-            {showErrorMessage ? <Alert severity="error">{errorMessage}</Alert> : <></>}
+            {showErrorMessage ? (
+                <Alert severity="error">{errorMessage}</Alert>
+            ) : (
+                <></>
+            )}
         </form>
     );
 };

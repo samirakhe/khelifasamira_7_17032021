@@ -1,5 +1,5 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./db');
+const db = require("./db");
 
 const Role = db.define("Role", {
     Roleid: {
@@ -7,11 +7,10 @@ const Role = db.define("Role", {
         primaryKey: true,
         autoIncrement: true,
     },
-    nameRole : {
-        type: DataTypes.ENUM('ADMIN', 'EMPLOYE'),
+    nameRole: {
+        type: DataTypes.ENUM("ADMIN", "EMPLOYE"),
         allowNull: false,
-        
-    }, 
+    },
 });
 
 module.exports = Role;

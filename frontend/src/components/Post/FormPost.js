@@ -1,17 +1,24 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import axiosInstance from "../../config/axios.config";
 import { useForm } from "react-hook-form";
 import "./Feed.css";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 const FormPost = (props) => {
-    const userCo = localStorage.getItem('pseudo');
-    const {register, handleSubmit,setError,formState: { errors },clearErrors, setValue,reset} = useForm();
+    const userCo = localStorage.getItem("pseudo");
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors },
+        clearErrors,
+        setValue,
+        reset,
+    } = useForm();
     const [img, setImg] = useState("");
     const MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
     //preview de l'image
-
     function readURL(e) {
         const input = e.target;
 
@@ -37,7 +44,6 @@ const FormPost = (props) => {
     }
 
     const handleFormPost = (data) => {
-        
         const formData = new FormData();
         if (data.image.length > 0) {
             formData.append("image", data.image[0]);
@@ -72,14 +78,13 @@ const FormPost = (props) => {
     };
 
     return (
-        
         <form
             className="formulaire"
             action=""
             onSubmit={handleSubmit(handleFormPost)}
             id="FormPost"
         >
-            <span className="userCo">Content de vous voir {userCo} !</span>
+            <span className="userCo">CONTENT DE VOUS VOIR {userCo} !</span>
             <label htmlFor="title"></label>
             <br />
             <input
@@ -110,9 +115,11 @@ const FormPost = (props) => {
             )}
 
             <br />
-            
+
             <label htmlFor="image" className="label-file">
-            <p>Choisir une image <PhotoCameraIcon/></p>  
+                <p>
+                    Choisir une image <PhotoCameraIcon />
+                </p>
             </label>
             <input
                 type="file"
@@ -125,14 +132,14 @@ const FormPost = (props) => {
                     onChange: readURL,
                 })}
             />
-         
+
             {errors.image && (
                 <span className="errorMessage">{errors.image.message}</span>
             )}
             {!errors.image && img && (
                 <img className="preview" alt="preview" src={img}></img>
             )}
-            <br/>
+            <br />
             <input className="btn" id="file" type="submit" value="Publier" />
         </form>
     );

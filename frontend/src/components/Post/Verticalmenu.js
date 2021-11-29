@@ -8,7 +8,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 import UpdatePost from "./UpdatePost";
 
-
 const ITEM_HEIGHT = 48;
 export default function LongMenu(props) {
     //Code importé Material UI-------------------------------------------------------------
@@ -21,27 +20,6 @@ export default function LongMenu(props) {
         setAnchorEl(null);
     };
     //FIN code importé Material UI-------------------------------------------------------------
-    
-// const updatePost = (e) => {
-//     e.preventDefault();
-
-//     axiosInstance({
-
-//         method:"put",
-//         url: `/posts/${props.Postid}`,
-//     }).then((successUpdate)=>{
-//             if (successUpdate) {
-//                 props.upPost(props.Postid);
-//                 console.log("post modifié");
-               
-//             } else {
-//                 console.log("Action non autorisée");
-//             }
-//     })
-// }
-
-
-
 
     const deletedPost = (e) => {
         e.preventDefault();
@@ -49,19 +27,15 @@ export default function LongMenu(props) {
         axiosInstance({
             method: "delete",
             url: `/posts/${props.post.Postid}`,
-           
         }).then((successDelete) => {
             if (successDelete) {
                 props.delPost(props.post.Postid);
                 console.log("post supprimé");
-               
             } else {
                 console.log("Action non autorisée");
             }
         });
     };
-
-    
 
     return (
         <div>
@@ -90,13 +64,12 @@ export default function LongMenu(props) {
                     },
                 }}
             >
-                 <MenuItem >
-                    <UpdatePost upPost={props.upPost} post={props.post}/>
+                <MenuItem>
+                    <UpdatePost upPost={props.upPost} post={props.post} />
                 </MenuItem>
                 <MenuItem onClick={deletedPost}>
                     <DeleteOutlineIcon />
                 </MenuItem>
-                
             </Menu>
         </div>
     );

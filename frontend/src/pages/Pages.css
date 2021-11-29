@@ -1,3 +1,12 @@
+body{
+    margin: auto;
+    overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
 .user-profil {
     display: flex;
     flex-direction: row;
@@ -17,6 +26,8 @@
 h2 {
     text-align: center;
 }
+  
+
 .btn-myaccount {
     background-color: #fef9f7;
     color: black;

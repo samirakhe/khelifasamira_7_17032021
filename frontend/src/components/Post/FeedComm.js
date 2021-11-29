@@ -1,7 +1,8 @@
 import React from 'react'
 import FeedCommItem from './FeedCommItem';
 
-
+// conteneur des commentaires
+// delComment cf fichier feed
 const FeedComm = (props) => {
 
         return (

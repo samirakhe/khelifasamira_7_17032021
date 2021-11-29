@@ -30,17 +30,23 @@ passwordSchema
 exports.createUsers = async (req, res, next) => {
     const data = { ...req.body };
     try {
+        // On vérifie que l'adresse email n'existe pas dans la bdd
         let user = await User.findOne({ where: { email: data.email } });
         if (user) {
-            return res.status(400).json({message: "Adresse email déjà utilisée"});
+            return res
+                .status(400)
+                .json({ message: "Adresse email déjà utilisée" });
         }
+        // On vérifie que le pseudo n'existe dans la bdd
         user = await User.findOne({ where: { pseudo: data.pseudo } });
         if (user) {
-            return res.status(400).json({message: "Ce pseudo est déjà utilisée"});
+            return res
+                .status(400)
+                .json({ message: "Ce pseudo est déjà utilisée" });
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({message : "Erreur interne du serveur"});
+        return res.status(500).json({ message: "Erreur interne du serveur" });
     }
 
     if (passwordSchema.validate(data.password)) {
@@ -48,17 +54,17 @@ exports.createUsers = async (req, res, next) => {
             .hash(data.password, 10)
             .then((hash) => {
                 data.password = hash;
+                // Une fois les conditions sur mdp remplies, l'user peut être créé
                 User.create({
                     email: data.email,
                     password: data.password,
                     pseudo: data.pseudo,
-
                 })
                     .then((userCreated) => {
-                        Role.findOne({ where: { nameRole: "EMPLOYE" } })
-                        .then((role) => {
-                                userCreated.setRoles([role])
-                                .then(() => {
+                        // Attribution du role EMPLOYE à tout nouvel user, admin étant deja enregistré dans la bdd
+                        Role.findOne({ where: { nameRole: "EMPLOYE" } }).then(
+                            (role) => {
+                                userCreated.setRoles([role]).then(() => {
                                     res.json(userCreated);
                                 });
                             }
@@ -68,29 +74,39 @@ exports.createUsers = async (req, res, next) => {
             })
             .catch((error) => res.status(500).json({ error }));
     } else {
-        return res.status(401).json({ message:"Votre mot de passe ne contient pas les caractères attendus" });
+        return res
+            .status(401)
+            .json({
+                message:
+                    "Votre mot de passe ne contient pas les caractères attendus",
+            });
     }
 };
 
 exports.login = (req, res) => {
-    console.log("données de connexion: ", req.body)
-   
     const data = { ...req.body };
+    // Recherche de l'user avec son adresse email
     User.findOne({ where: { email: data.email.trim() }, include: ["roles"] })
 
         .then((userData) => {
             console.log(userData);
             const user = userData;
             if (!user) {
-                return res.status(401).json({ error: "Adresse email ou mot de passe incorrect" });
+                return res
+                    .status(401)
+                    .json({ error: "Adresse email ou mot de passe incorrect" });
             }
             bcrypt
+                // comparaison des mots de passe
                 .compare(data.password, user.password)
                 .then((valid) => {
-                    console.log('valide', valid)
+                    console.log("valide", valid);
                     if (!valid) {
-
-                        return res.status(401).json({ error: "Adresse email ou mot de passe incorrect" });
+                        return res
+                            .status(401)
+                            .json({
+                                error: "Adresse email ou mot de passe incorrect",
+                            });
                     }
                     res.status(200).json({
                         pseudo: user.pseudo,
@@ -126,6 +142,7 @@ exports.getAllusers = (req, res) => {
         });
 };
 
+// récupération d'un user avec les posts que celui ci a créé
 exports.getOneUser = (req, res) => {
     User.findByPk(req.params.id, {
         //findbyprimarykey
@@ -140,46 +157,16 @@ exports.getOneUser = (req, res) => {
         });
 };
 
-exports.modifyUsers = (req, res) => {
-    const data = req.body;
-    User.findByPk(req.params.id)//on recherche l'user qui a l'id qui correspond à la PK
-
-    .then((user)=>{
-        if(!user){
-            return res.status(404).json("User non trouvé");
-
-        }else{
-            bcrypt.compare(data.password, user.password )
-            .then((valid)=>{
-                if(!valid){
-                    return res.status(404).json("Mot de passe incorrect")
-                }else{
-                    User.update({password: data.newPassword }, { where: { Userid : req.params.id} })
-                         .then((user) => {
-                            return res.status(200).json('mot de passe modifé');
-                  })
-                    .catch((err) => {
-                    console.log(err);
-                });
-                }
-
-            })
-            }
-
-        })
-    
-};
-
+// Suppression du compte de l'user
 exports.deleteUsers = async (req, res) => {
     try {
-    await Commentaires.destroy({where:{ Userid: req.params.id}})
-    await Posts.destroy({where:{ Userid: req.params.id}})
-    await User.destroy ({ where: { Userid : req.params.id}})
-    return res
+        await Commentaires.destroy({ where: { Userid: req.params.id } });
+        await Posts.destroy({ where: { Userid: req.params.id } });
+        await User.destroy({ where: { Userid: req.params.id } });
+        return res
             .status(200)
-            .json({ message: "L'utilisateur est supprimé !" })
-    }
-    catch(error){
+            .json({ message: "L'utilisateur est supprimé !" });
+    } catch (error) {
         return res.status(400).json({ error });
-    };
+    }
 };

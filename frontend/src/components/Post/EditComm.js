@@ -1,51 +1,57 @@
-import React, { useState } from 'react';
-import axiosInstance from '../../config/axios.config';
+import React, { useState } from "react";
+import axiosInstance from "../../config/axios.config";
 
-const EditComm = (props) => { 
-
+const EditComm = (props) => {
     const [texte, setTexte] = useState(props.commentaire.commentaire);
     const handleFormComm = (e) => {
         e.preventDefault();
-        
-    axiosInstance({
-        method: "put",
-        url: `/commentaires/${props.commentaire.Commentaireid}`,
-        
-        data:{
-        commentaire:texte,
-          },       
-        
-    }).then((success)=>{
-        console.log(success)
-      
-        const data = {Commentaireid:props.commentaire.Commentaireid, texte:texte}
-        props.upComment(data)
-        setTexte('');
-        props.handleClose();
-       
-       
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
-    return(
-        <form className="form-update-comm" action="" onSubmit={handleFormComm} id="FormPost">  
-        <label htmlFor="texte">Votre Message</label>
-        <br/>
-        <input 
-          type="text-area" 
-          name="texte" 
-          id="comm-update" 
-          onChange={(e) => setTexte(e.target.value)} 
-          value={texte}/>
 
-          <div className=" texte error"></div>
+        axiosInstance({
+            method: "put",
+            url: `/commentaires/${props.commentaire.Commentaireid}`,
 
-        <br/>
-        
-        <input className="btn-comm"  type="submit" value="ok"/>
-      </form>
+            data: {
+                commentaire: texte,
+            },
+        })
+            .then((success) => {
+                console.log(success);
+                const data = {
+                    Commentaireid: props.commentaire.Commentaireid,
+                    texte: texte,
+                };
+                // upComment cf fichier feedCommItem
+                props.upComment(data);
+                setTexte("");
+                props.handleClose();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    return (
+        <form
+            className="form-update-comm"
+            action=""
+            onSubmit={handleFormComm}
+            id="FormPost"
+        >
+            <label htmlFor="texte">Votre Message</label>
+            <br />
+            <input
+                type="text-area"
+                name="texte"
+                id="comm-update"
+                onChange={(e) => setTexte(e.target.value)}
+                value={texte}
+            />
+
+            <div className=" texte error"></div>
+
+            <br />
+
+            <input className="btn-comm" type="submit" value="ok" />
+        </form>
     );
 };
 

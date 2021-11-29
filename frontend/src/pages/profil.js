@@ -1,12 +1,11 @@
-import React from 'react';
-import Log from '../components/log/Log';
-
+import React from "react";
+import Log from "../components/log/Log";
 
 const Profil = () => {
-    return(
+    return (
         <div className="profil-page">
             <div className="log-container">
-                <Log login={true} signup={false}/>
+                <Log login={true} signup={false} />
             </div>
         </div>
     );

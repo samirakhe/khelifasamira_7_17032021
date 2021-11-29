@@ -19,7 +19,7 @@ const FormCommentaire = (props) => {
             .then((newComm) => {
                 console.log(newComm);
                 props.onCommCreated(newComm.data);
-                setTexte('');
+                setTexte("");
             })
             .catch((err) => {
                 console.log(err);
@@ -43,7 +43,6 @@ const FormCommentaire = (props) => {
                 id="texte-comm"
                 onChange={(e) => setTexte(e.target.value)}
                 value={texte}
-               
             />
             <br />
             <input className="btn-comm" type="submit" value="OK" />

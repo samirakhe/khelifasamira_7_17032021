@@ -12,6 +12,7 @@ const Log = ( props ) => {
     const [LoginModal, setLoginModal] = useState(props.login);
 
     const handleModals = (e) => {
+        // Register affiche signupmodal, login affiche loginmodal
         if (e.target.id === "register") {
             setLoginModal(false);
             setSignupModal(true);
@@ -45,16 +46,7 @@ const Log = ( props ) => {
                                 Créer un compte
                         </button>
                     </p>
-                    {/* <ThemeProvider theme={theme}>
-                        <Button 
-                        color="primary" 
-                        variant="contained"
-                        onClick={handleModals} 
-                        id="register" 
-                        className={SignupModal ? "active-button" : null}>
-                        Créer un compte
-                        </Button>
-                    </ThemeProvider> */}
+                    
                 </ul>
                 {SignupModal && <SignupForm />}
                 {LoginModal && <LoginForm />}

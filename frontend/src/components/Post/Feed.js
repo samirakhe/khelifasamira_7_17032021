@@ -22,6 +22,9 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import axiosInstance from "../../config/axios.config";
 import Auth from "../auth";
 
+
+
+// Code importé Material Ui
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -32,6 +35,8 @@ const ExpandMore = styled((props) => {
         duration: theme.transitions.duration.shortest,
     }),
 }));
+//----------------------------------------
+
 
 export default function Feed(props) {
     const [expanded, setExpanded] = useState(false);
@@ -56,7 +61,9 @@ export default function Feed(props) {
         axiosInstance({
             method: "delete",
             url: `/posts/admin/${props.post.Postid}`,
-        }).then((successDeleteFromAdmin) => {
+        })
+        
+        .then((successDeleteFromAdmin) => {
             if (successDeleteFromAdmin) {
                 props.delPost(props.post.Postid);
                 console.log("post supprimé");

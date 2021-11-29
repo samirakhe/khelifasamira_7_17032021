@@ -1,5 +1,5 @@
 const { Sequelize, Models, DataTypes } = require("sequelize");
-const db = require('./db');
+const db = require("./db");
 
 const Commentaire = db.define("Commentaire", {
     Commentaireid: {
@@ -10,7 +10,7 @@ const Commentaire = db.define("Commentaire", {
     },
     commentaire: {
         type: DataTypes.TEXT,
-        allowNull : true,
+        allowNull: true,
     },
 });
 

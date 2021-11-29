@@ -22,13 +22,8 @@ app.use((req, res, next) => {
 
 app.use(cors());
 app.use('/images', express.static(path.join(__dirname, 'backend/images')));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-
-
 
 app.use(express.json());
 app.use('/api/users', userRoutes);

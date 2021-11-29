@@ -1,11 +1,7 @@
-const bcrypt = require("bcrypt");
-const passwordValidator = require("password-validator");
-const jwt = require("jsonwebtoken");
 const Commentaire = require("../models/commentaires");
-const Post = require("../models/posts");
 require("dotenv").config();
 
-
+//creation d'un commentaire contenant automatiquement les datas creation du commentaire-
 exports.createComm = (req, res) => {
     const comm = req.body;
     comm.Userid = req.user.Userid;
@@ -22,22 +18,23 @@ exports.createComm = (req, res) => {
         });
 };
 
+// Modification d'un commentaire
+// Vérification que l'user qui souhaite modifier soit le createur du commentaire
 exports.modifyComm = (req, res) => {
     const id = req.params.id;
-    const userid= req.user.Userid;
+    const userid = req.user.Userid;
     const data = req.body;
-    Commentaire.update(data, { where: { Commentaireid: id, Userid: userid  }  })
-    .then(
-        (newcomm) => {
+    Commentaire.update(data, { where: { Commentaireid: id, Userid: userid } })
+        .then((newcomm) => {
             return res.json(newcomm);
-        }
-    )
-    .catch((err) =>{
-        //console.log(err)
-        res.status(500).send("Erreur server");
-    });
+        })
+        .catch((err) => {
+            //console.log(err)
+            res.status(500).send("Erreur server");
+        });
 };
 
+// Supprimer un commentaire, spécifié à l'user qui a créé le commentaire.
 exports.deleteComm = async (req, res) => {
     try {
         const comm = await Commentaire.findOne({
@@ -58,10 +55,11 @@ exports.deleteComm = async (req, res) => {
         )
         .catch((error) => {
             console.log(error);
-            res.status(400).json("Action non autorisée");
+            res.status(401).json("Action non autorisée");
         });
 };
 
+// Supprimer un commentaire, l'admin peut supprimer les commentaires même s'il ne les a pas créé
 exports.deleteCommbyAdmin = (req, res) => {
     Commentaire.destroy({ where: { Commentaireid: req.params.id } })
         .then(() =>
@@ -73,6 +71,7 @@ exports.deleteCommbyAdmin = (req, res) => {
         });
 };
 
+// Récupérer tous les commentaires
 exports.getAllCom = (req, res) => {
     Commentaire.findAll()
         .then((commentaire) => {
