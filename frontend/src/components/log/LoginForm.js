@@ -15,7 +15,9 @@ const Login = () => {
    
    const handleLogin = (e) => {
      e.preventDefault();
+     //cf axions dossier services
     login(email, password)
+    //--------------------------------
     .then((userData)=>{
     console.log(userData)
      localStorage.setItem("connectedUser", JSON.stringify(userData.data));
@@ -33,7 +35,7 @@ const Login = () => {
 
 
     return(
-      <form action="" onSubmit={handleLogin} id="loginForm">
+      <form  onSubmit={handleLogin} id="loginForm">
         <label className="label" htmlFor="email"></label>
         <br/>
         <input 
@@ -43,8 +45,6 @@ const Login = () => {
           id="email" 
           onChange={(e) => setEmail(e.target.value)} 
           value={email}/>
-
-          <div className=" email error"></div>
 
         <br/>
         <label className="label" htmlFor="password"></label>
@@ -56,7 +56,7 @@ const Login = () => {
           id="password" 
           onChange={(e) => setPassword(e.target.value)} 
           value={password}/>
-          <div className="password error"></div>
+          
           <br/>
 
         <input className="btn" type="submit" value="Se connecter"/>

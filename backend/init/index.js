@@ -10,6 +10,7 @@ exports.initRoles = async () => {
     if (roles && roles.length > 0) {
         return;
     }
+    //bulkcreate permet de créer plusieurs objets à la fois
     await Role.bulkCreate([{ nameRole: "ADMIN" }, { nameRole: "EMPLOYE" }]);
 };
 

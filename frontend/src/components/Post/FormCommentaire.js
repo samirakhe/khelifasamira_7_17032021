@@ -1,21 +1,15 @@
 import React, { useState } from "react";
+import { postComment } from "../../services/commService";
 import "./Feed.css";
-import axiosInstance from "../../config/axios.config";
+
 
 const FormCommentaire = (props) => {
     const [texte, setTexte] = useState("");
 
     const handleFormCommentaire = (e) => {
         e.preventDefault();
-
-        axiosInstance({
-            method: "post",
-            url: `/commentaires`,
-            data: {
-                commentaire: texte,
-                Postid: props.postId,
-            },
-        })
+        postComment(props.postId, texte)
+        
             .then((newComm) => {
                 console.log(newComm);
                 props.onCommCreated(newComm.data);

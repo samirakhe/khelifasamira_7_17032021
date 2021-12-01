@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import axiosInstance from "../../config/axios.config";
+import { editComm } from "../../services/commService";
 
 const EditComm = (props) => {
     const [texte, setTexte] = useState(props.commentaire.commentaire);
     const handleFormComm = (e) => {
         e.preventDefault();
-
-        axiosInstance({
-            method: "put",
-            url: `/commentaires/${props.commentaire.Commentaireid}`,
-
-            data: {
-                commentaire: texte,
-            },
-        })
+        editComm(props.commentaire.Commentaireid, texte)
             .then((success) => {
                 console.log(success);
                 const data = {
@@ -32,14 +24,13 @@ const EditComm = (props) => {
     return (
         <form
             className="form-update-comm"
-            action=""
             onSubmit={handleFormComm}
             id="FormPost"
         >
             <label htmlFor="texte">Votre Message</label>
             <br />
             <input
-                type="text-area"
+                type="text"
                 name="texte"
                 id="comm-update"
                 onChange={(e) => setTexte(e.target.value)}

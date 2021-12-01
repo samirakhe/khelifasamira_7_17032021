@@ -6,15 +6,7 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 
 const FormPost = (props) => {
     const userCo = localStorage.getItem("pseudo");
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors },
-        clearErrors,
-        setValue,
-        reset,
-    } = useForm();
+    const {register,handleSubmit,setError,formState: { errors },clearErrors,setValue,reset} = useForm();
     const [img, setImg] = useState("");
     const MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -80,7 +72,6 @@ const FormPost = (props) => {
     return (
         <form
             className="formulaire"
-            action=""
             onSubmit={handleSubmit(handleFormPost)}
             id="FormPost"
         >
@@ -104,7 +95,7 @@ const FormPost = (props) => {
             <br />
             <input
                 placeholder="Quoi de neuf ?"
-                type="text-area"
+                type="text"
                 name="texte"
                 id="texte"
                 {...register("texte", { required: true })}
@@ -115,30 +106,34 @@ const FormPost = (props) => {
             )}
 
             <br />
+            {!errors.image && img && (
+                <img className="preview" alt="preview" src={img}></img>
+            )}
+             <br />
 
             <label htmlFor="image" className="label-file">
-                <p>
+                
                     Choisir une image <PhotoCameraIcon />
-                </p>
+                
             </label>
+            
+            
             <input
                 type="file"
                 accept="image/jpeg, image/jpg, image/png"
                 name="image"
                 id="image"
                 className="input-file"
-                placeholder="Ajouter une image"
                 {...register("image", {
                     onChange: readURL,
                 })}
             />
+           
 
             {errors.image && (
                 <span className="errorMessage">{errors.image.message}</span>
             )}
-            {!errors.image && img && (
-                <img className="preview" alt="preview" src={img}></img>
-            )}
+            
             <br />
             <input className="btn" id="file" type="submit" value="Publier" />
         </form>

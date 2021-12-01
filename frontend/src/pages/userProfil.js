@@ -1,27 +1,23 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useHistory } from "react-router";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import axiosInstance from "../config/axios.config";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./Pages.css";
+import { deletetheProfil } from "../services/userService";
 
 const UserProfil = (props) => {
     const [userInformations, setUserInformations] = useState({});
-    const history = useHistory();
+    //code importé Material Ui 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    //--------------------------------------------------
 
     useEffect(() => {
         const userInfo = localStorage.getItem("connectedUser");
-        if (!userInfo) {
-            history.push("/");
-        } else {
-            setUserInformations(JSON.parse(userInfo));
-        }
+        setUserInformations(JSON.parse(userInfo));
     }, []);
 
     const deleteUser = () => {
@@ -34,11 +30,7 @@ const UserProfil = (props) => {
 
     const deleteProfil = (e) => {
         e.preventDefault();
-
-        axiosInstance({
-            method: "delete",
-            url: `/users/${userInformations.Userid}`,
-        })
+        deletetheProfil(userInformations.Userid)
             .then(() => {
                 deleteUser();
             })
@@ -59,6 +51,7 @@ const UserProfil = (props) => {
         boxShadow: 24,
         p: 4,
     };
+    //--------------------------------------------------------
 
     return (
         <div className="user-profil">
@@ -73,6 +66,7 @@ const UserProfil = (props) => {
 
                 <p>Pseudo : {userInformations.pseudo} </p>
                 <p>Email : {userInformations.email} </p>
+               {/* Importé de Materiel UI */}
                 <Button
                     className="deleteButton"
                     onClick={handleOpen}

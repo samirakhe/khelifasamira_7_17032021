@@ -12,9 +12,9 @@ const Header = (props) => {
                 </a>
                 
                 <Auth userConnected={false}>
-                    <a href="/profil">
-                        <button className="btn-myaccount">Connexion</button>
-                    </a>
+                    
+                        <button className="btn-myaccount"><a href="/profil">Connexion</a></button>
+                    
                 </Auth>
 
                 <Auth userConnected={true}>

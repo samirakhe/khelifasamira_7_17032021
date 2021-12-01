@@ -1,37 +1,29 @@
 import React, { useState } from "react";
 import "./log.css";
-import axiosInstance from "../../config/axios.config";
 import { useForm } from "react-hook-form";
 import { login } from "../../services/loginService";
 import Alert from "@mui/material/Alert";
+import { signup } from "../../services/signupService";
 
 //Utilisation de react useform
 const Signup = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const {register,handleSubmit,formState: { errors } } = useForm();
     const [successAlert, setSuccessAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const handleSignup = (data) => {
-        axiosInstance({
-            method: "post",
-            url: `/users/signup`,
-            data: {
-                pseudo: data.pseudo,
-                email: data.email,
-                password: data.password,
-            },
-        })
+    
+        //requete axios cf dossier services
+        signup(data)
+        //--------------------------------------------
             .then((newUser) => {
                 console.log(newUser);
                 login(data.email, data.password)
                     .then((userData) => {
                         setSuccessAlert(true);
                         console.log(userData);
+                        //enregistrement de l'user dans le localstorage
                         localStorage.setItem(
                             "connectedUser",
                             JSON.stringify(userData.data)
@@ -60,6 +52,8 @@ const Signup = () => {
         console.log(data);
     };
 
+
+    //utilisation de useform
     return (
         <form action="" onSubmit={handleSubmit(handleSignup)} id="signupForm">
             <label className="label" htmlFor="pseudo"></label>

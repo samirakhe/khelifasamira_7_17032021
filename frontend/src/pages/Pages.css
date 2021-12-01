@@ -2,26 +2,30 @@ body{
     margin: auto;
     overflow-x: hidden;
     width: 100%;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction:column;
 
+}
+.profil-page{
+    min-height: 100vh;
 }
 .user-profil {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     margin: 50px 150px 0px 150px;
+    flex:1;
 }
+
 .user-info {
     align-items: center;
     vertical-align: center;
-}
-.user-info {
     border: solid 2px black;
     box-shadow: 10px 5px 5px grey;
     width: 40%;
     padding: 20px;
+    height: 60%;
 }
 h2 {
     text-align: center;

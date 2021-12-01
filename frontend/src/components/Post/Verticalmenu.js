@@ -1,5 +1,4 @@
 import React from "react";
-import axiosInstance from "../../config/axios.config";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +6,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 import UpdatePost from "./UpdatePost";
+import { deletethePost } from "../../services/postService";
 
 const ITEM_HEIGHT = 48;
 export default function LongMenu(props) {
@@ -24,10 +24,8 @@ export default function LongMenu(props) {
     const deletedPost = (e) => {
         e.preventDefault();
 
-        axiosInstance({
-            method: "delete",
-            url: `/posts/${props.post.Postid}`,
-        }).then((successDelete) => {
+        deletethePost(props.post.Postid)
+        .then((successDelete) => {
             if (successDelete) {
                 props.delPost(props.post.Postid);
                 console.log("post supprimé");

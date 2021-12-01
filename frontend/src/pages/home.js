@@ -14,15 +14,15 @@ const Home = () => {
     useEffect(() => {
         getPost();
     }, []);
-
+//create post
     const postCreated = (newPost) => {
         setPosts([newPost, ...posts]);
     };
-
+//delete post
     const delPost = (postId) => {
         setPosts(posts.filter((post) => post.Postid !== postId));
     };
-
+//update post
     const upPost = (postId, data) => {
         const postIndex = posts.findIndex((post) => post.Postid === postId);
         const postsArray = [...posts];
@@ -30,7 +30,6 @@ const Home = () => {
         findPost.title = data.title;
         findPost.texte = data.texte;
         findPost.image = data.image;
-
         postsArray[postIndex] = findPost;
         setPosts(postsArray);
     };

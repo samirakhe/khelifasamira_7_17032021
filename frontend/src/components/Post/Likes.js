@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axiosInstance from "../../config/axios.config";
 import Badge from "@mui/material/Badge";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Auth from "../auth";
+import { postLike } from "../../services/postService";
 
 const Likes = (props) => {
     const [likes, setLikes] = useState(props.likes);
@@ -13,14 +13,7 @@ const Likes = (props) => {
     const executeLike = (e) => {
         e.preventDefault();
 
-        axiosInstance({
-            method: "post",
-            url: `/likes`,
-
-            data: {
-                Postid: props.postId,
-            },
-        })
+        postLike(props.postId)
             .then((newLike) => {
                 const index = likes.findIndex(
                     (like) => like.Likeid === newLike.data.Likeid

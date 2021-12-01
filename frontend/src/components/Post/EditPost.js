@@ -6,14 +6,7 @@ import { useForm } from "react-hook-form";
 
 // utilisation de useform
 const EditPost = (props) => {
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors },
-        clearErrors,
-        setValue,
-    } = useForm();
+    const {register,handleSubmit,setError,formState: { errors },clearErrors,setValue} = useForm();
     const [imag, setImag] = useState("");
     const MIME_TYPES = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -95,7 +88,7 @@ const EditPost = (props) => {
             <label htmlFor="texte">Votre Message</label>
             <br />
             <input
-                type="text-area"
+                type="text"
                 name="texte"
                 id="texte"
                 {...register("texte", { required: true })}
@@ -108,9 +101,9 @@ const EditPost = (props) => {
             <br />
 
             <label for="imge" className="label-file">
-                <p>
+                
                     Choisir une image <PhotoCameraIcon />
-                </p>
+                
             </label>
             <input
                 type="file"
@@ -118,7 +111,6 @@ const EditPost = (props) => {
                 name="image"
                 id="imge"
                 className="input-file"
-                placeholder="Ajouter une image"
                 {...register("image", {
                     onChange: readurl,
                 })}

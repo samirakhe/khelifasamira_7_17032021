@@ -9,7 +9,7 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import CardMedia from '@mui/material/CardMedia';
+import CardMedia from "@mui/material/CardMedia";
 import FeedTitle from "./FeedTitle";
 import FeedComm from "./FeedComm";
 import Verticalmenu from "./Verticalmenu";
@@ -19,10 +19,8 @@ import Likes from "./Likes";
 import IsOwner from "../isOwner";
 import IsAdmin from "../isAdmin";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import axiosInstance from "../../config/axios.config";
 import Auth from "../auth";
-
-
+import { deletePost } from "../../services/postService";
 
 // Code importé Material Ui
 const ExpandMore = styled((props) => {
@@ -36,7 +34,6 @@ const ExpandMore = styled((props) => {
     }),
 }));
 //----------------------------------------
-
 
 export default function Feed(props) {
     const [expanded, setExpanded] = useState(false);
@@ -55,14 +52,12 @@ export default function Feed(props) {
     useEffect(() => {
         setCommentaires(props.post.commentaires);
     }, [props.post.commentaires]);
+
+    
     const deletedPostFromAdmin = (e) => {
         e.preventDefault();
 
-        axiosInstance({
-            method: "delete",
-            url: `/posts/admin/${props.post.Postid}`,
-        })
-        
+        deletePost(props.post.Postid)
         .then((successDeleteFromAdmin) => {
             if (successDeleteFromAdmin) {
                 props.delPost(props.post.Postid);
@@ -74,22 +69,22 @@ export default function Feed(props) {
     };
 
     return (
-        <Card className="card" >
+        <Card className="card">
             <CardHeader
                 action={
-                    <IconButton aria-label="settings">
-                        <IsOwner user={props.post.user.pseudo}>
+                    <IsOwner user={props.post.user.pseudo}>
+                        
                             <Verticalmenu
                                 upPost={props.upPost}
                                 delPost={props.delPost}
                                 post={props.post}
                             />
-                        </IsOwner>
-                    </IconButton>              
+                        
+                    </IsOwner>
                 }
-                
-                title={               
-                    <FeedTitle className="feedtitle"
+                title={
+                    <FeedTitle
+                        className="feedtitle"
                         date={props.post.createdAt}
                         pseudo={props.post.user.pseudo}
                         title={props.post.title}
@@ -98,14 +93,15 @@ export default function Feed(props) {
             />
 
             <CardContent className="cardcontent">
-                
-                {props.post.image && <CardMedia
-                id="cardmedia"
-
-                    component="img"    
-                    image={props.post.image}          
-                />}
-                <br/>
+                {props.post.image && (
+                    <CardMedia
+                        className="cardmedia"
+                        alt="cardmedia"
+                        component="img"
+                        image={props.post.image}
+                    />
+                )}
+                <br />
                 <Typography variant="body2" color="text.secondary">
                     {props.post.texte}
                 </Typography>
@@ -133,7 +129,7 @@ export default function Feed(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography>
+                    
                         <Auth userConnected={true}>
                             <FormCommentaire
                                 postId={props.post.Postid}
@@ -149,7 +145,7 @@ export default function Feed(props) {
                         ) : (
                             <> </>
                         )}
-                    </Typography>
+                   
                 </CardContent>
             </Collapse>
         </Card>

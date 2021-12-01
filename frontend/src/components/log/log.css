@@ -1,87 +1,92 @@
-
-#loginForm, #signupForm{
-    background-color:#f5d3c6;
+#loginForm,
+#signupForm {
+    background-color: #f5d3c6;
     width: 30%;
     font-size: 15px;
-    margin:auto;
-    padding:30px;
+    margin: auto;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 12px 13px 7px 3px #d7d4d4;
 }
 
-.label{
+.label {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
 }
- a{
-   color:green;
- }
+a {
+    color: rgb(180, 48, 48);
+}
 
 .btn {
-    
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 1px;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
-    background-color: white; 
-    color: black; 
+    background-color: white;
+    color: black;
     border-radius: 15px;
     box-shadow: 6px 6px 6px 2px #ada7a7;
-  }
-  
-#register{
-  border:none;
-  background-color: white;
-  cursor: pointer;
-  text-decoration:underline;
-  font-weight: bold;
-  color:black;
 }
-#register:hover{
-  color:#fd4f2b;
+
+#register {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+    color: black;
 }
-  .btn:hover {
+#register:hover {
+    color: #fd4f2b;
+}
+.btn:hover {
     background-color: tomato;
     color: white;
-  }
+}
 
-  .userCo{
+.userCo {
     margin-right: 10px;
-  }
+    color: #fd461fa1;
+    font-weight: bold;
+}
 
-  .accountButton{
+.accountButton {
     text-align: center;
-  }
+    margin-top: 30px;
+}
 
-  #register, #login{
+#register,
+#login {
     margin: 10px;
-  }
-  #signupForm, #loginForm{
+}
+#signupForm,
+#loginForm {
     text-align: center;
-  }
-  #pseudo, #email, #password {
+}
+#pseudo,
+#email,
+#password {
     padding: 9px;
     width: 76%;
 }
-  
-@media screen and (max-width: 768px) {
 
-  #loginForm, #signupForm{
-    position: relative;
-    width: 70%;
-    margin: auto;
-    
-  }
-  .btn{
-    width: 100%;
-    font-size: 14px;
-  }
+@media screen and (max-width: 768px) {
+    #loginForm,
+    #signupForm {
+        position: relative;
+        width: 70%;
+        margin: auto;
+    }
+    .btn {
+        width: 100%;
+        font-size: 14px;
+    }
 }

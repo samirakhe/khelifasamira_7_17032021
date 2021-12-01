@@ -5,7 +5,6 @@ const multer = require('multer')
 const path = require('path')
 const cors = require("cors");
 const bodyParser = require('body-parser');
-
 const userRoutes = require('./backend/routes/users');
 const postRoutes = require('./backend/routes/posts');
 const commentaireRoutes =  require('./backend/routes/commentaires');
@@ -17,8 +16,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
-
 
 app.use(cors());
 app.use('/images', express.static(path.join(__dirname, 'backend/images')));

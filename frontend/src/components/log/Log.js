@@ -25,7 +25,7 @@ const Log = ( props ) => {
     return (
         <div className="connection-form">
             <div className="form-container">
-                <ul className="accountButton">
+                <div className="accountButton">
                     
                     <ThemeProvider theme={theme}>
                         <Button 
@@ -37,7 +37,7 @@ const Log = ( props ) => {
                         Connexion
                         </Button>       
                     </ThemeProvider>
-                    <br/>
+                    
                     <p>Vous n'avez pas encore de compte ? 
                         <button 
                             onClick={handleModals} 
@@ -47,7 +47,7 @@ const Log = ( props ) => {
                         </button>
                     </p>
                     
-                </ul>
+                </div>
                 {SignupModal && <SignupForm />}
                 {LoginModal && <LoginForm />}
             </div>

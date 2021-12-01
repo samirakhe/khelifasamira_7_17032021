@@ -91,6 +91,7 @@ exports.getAllposts = (req, res) => {
                 as: "commentaires",
                 attributes: ["Commentaireid", "commentaire", "createdAt"],
                 include: [{ model: User, as: "user", attributes: ["pseudo"] }],
+                
             },
             { model: User, as: "user", attributes: ["pseudo"] },
         ], //as de init
@@ -129,16 +130,28 @@ exports.deletePosts = async (req, res) => {
         if (!post) {
             return res.status(401).json("Action non autorisée");
         }
+        Post.destroy({
+            where: { Postid: req.params.id, Userid: req.user.Userid },
+        })
+            .then(() => {
+                if (post.image) {
+                    //on récupere le nom de l'image
+                    const filename = post.image.split("images/")[1];
+                    //on verifie si cette image existe en tant que fichier, si oui, on la supprime
+                    if (fs.existsSync("backend/images/" + filename)) {
+                        fs.unlinkSync("backend/images/" + filename);
+                    }
+                }
+                res.status(200).json({ message: "Le post est supprimé !" });
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(400).json("Action non autorisée");
+            });
     } catch (error) {
         console.log(error);
-        res.status(500).json("Erreur interne du serveur");
+        return res.status(500).json("Erreur interne du serveur");
     }
-    Post.destroy({ where: { Postid: req.params.id, Userid: req.user.Userid } })
-        .then(() => res.status(200).json({ message: "Le post est supprimé !" }))
-        .catch((error) => {
-            console.log(error);
-            res.status(400).json("Action non autorisée");
-        });
 };
 
 // Supprimer un post par l'admin
